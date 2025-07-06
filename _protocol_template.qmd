@@ -1,0 +1,12 @@
+---
+title: Protocol name |
+    Describe what the protocol does here.
+author: NAME ME
+date: "`r Sys.Date()`"
+date-modified: "`r format(Sys.time(), '%d %B %Y')`"
+date-format: long
+execute: 
+  eval: false
+---
+
+# Write about your protocol here.

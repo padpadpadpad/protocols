@@ -1,0 +1,12 @@
+---
+title: How clean is the sea? Plating for _E. coli_  |
+    Protocol for preparing and plating seawater samples for counting _E. coli_.
+author: Daniel Padfield
+date: "`r Sys.Date()`"
+date-modified: "`r format(Sys.time(), '%d %B %Y')`"
+date-format: long
+execute: 
+  eval: false
+---
+
+# Write about your protocol here.

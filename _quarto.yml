@@ -13,8 +13,9 @@ format:
   pdf:
     toc: true
     toc-depth: 5
+    fontsize: 14pt
     code-overflow: wrap
-    keep-tex: true
+    keep-tex: false
     include-in-header: 
        text: |
          \usepackage{fvextra}
