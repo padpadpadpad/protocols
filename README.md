@@ -6,7 +6,7 @@ This is a collection of protocols useful we use for doing things in the DanPadLa
 
 ## Contributing
 
-We would love for you to contribute to this repository! If you are a member of DanPadLab, you can come talk to me in person! If not, please open an issue[here](https://github.com/padpadpadpad/protocols/issues).
+We would love for you to contribute to this repository! If you are a member of DanPadLab, you can come talk to me in person! If not, please open an issue [here](https://github.com/padpadpadpad/protocols/issues).
 
 ## How to use this repository
 
