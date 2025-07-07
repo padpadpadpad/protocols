@@ -1,7 +1,13 @@
-# move all files post render into the correct directory
+# post render script for organising files after rendering
 
-# list files
-files <- list.files('protocol_output', full.names = TRUE, recursive = TRUE)
+# 1. Move all files from protocol_output/protocol_input to protocol_output
+
+# list files in protocol_output/protocol_input
+files <- list.files(
+  'protocol_output/protocol_input',
+  full.names = TRUE,
+  recursive = TRUE
+)
 
 # move files into "protocol_output" directory
 for (file in files) {
@@ -15,21 +21,58 @@ for (file in files) {
   file.rename(file, dest_path)
 }
 
-# remove any directories within "protocol_output"
-dirs <- list.dirs('protocol_output', full.names = TRUE, recursive = FALSE)
+# remove protocol_output/protocol_input
+dirs <- unlink('protocol_output/protocol_input', recursive = TRUE)
 
-for (dir in dirs) {
-  # remove the directory
-  unlink(dir, recursive = TRUE)
+
+# 2. move all files from protocol_input to their own directories in protocol_output
+
+# list files
+files <- list.files('protocol_input', full.names = TRUE, recursive = TRUE)
+
+# create directory for each in protocol output
+for (file in files) {
+  # get the file name without extension
+  file_name <- basename(file) |> tools::file_path_sans_ext()
+
+  # create the directory path
+  dir_path <- file.path('protocol_output', file_name)
+
+  # create the directory if it does not exist
+  if (!dir.exists(dir_path)) {
+    dir.create(dir_path, recursive = TRUE)
+  }
 }
 
-# remove any .tex files in protocol_input
-tex_files <- list.files(
-  'protocol_input',
-  pattern = '\\.tex$',
-  full.names = TRUE
+# copy input files into the right directory, rename them index.qmd
+for (file in files) {
+  # get the file name without extension
+  file_name <- basename(file) |> tools::file_path_sans_ext()
+
+  # create the destination path
+  dest_path <- file.path('protocol_output', file_name, 'index.qmd')
+
+  # copy the file to the destination path
+  file.copy(file, dest_path, overwrite = TRUE)
+}
+
+# 3. Move all correct output files into their respective directories
+
+# list files in protocol_output
+files <- list.files(
+  'protocol_output',
+  full.names = TRUE,
+  pattern = ".html|.docx|.pdf"
 )
-for (tex_file in tex_files) {
-  # remove the .tex file
-  unlink(tex_file)
+
+# move them into the correct directory
+for (file in files) {
+  # get the file name
+  file_name <- basename(file) |> tools::file_path_sans_ext()
+
+  # create the destination path
+  dest_path <- file.path('protocol_output', file_name, basename(file))
+
+  # move the file
+  file.rename(file, dest_path)
 }
