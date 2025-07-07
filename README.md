@@ -35,9 +35,9 @@ format:
   html:
     other-links:
       - text: pdf
-        href: index.pdf
+        href: INSERTPROTOCOLNAME.pdf
       - text: Word doc
-        href: index.docx
+        href: INSERTPROTOCOLNAME.docx
 ```
 
 ## An example of using trackdown
