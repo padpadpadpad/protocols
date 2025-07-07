@@ -1,7 +1,10 @@
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'protocol_output/finished/**'
+
+name: Move files to website
 
 jobs:
   file-update-controller:
