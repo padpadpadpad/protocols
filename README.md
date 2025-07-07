@@ -20,21 +20,19 @@ The protocols in this repository are written in [Quarto](https://quarto.org/), a
 4. If starting a new protocol, copy the `_protocol_template.qmd` file into `protocol_input` and rename it to the name of the protocol. If you are editing an existing protocol, you can skip this step.
 5. Open the file you want to edit. Make changes. You can do this in a variety of ways.
     1. You can use Positron and RStudio to edit the .qmd files directly. They both have a built-in preview feature that allows you to see how the document will look when rendered.
-    2. You can use [trackdown](https://github.com/claudiozandonella/trackdown/) which can allow you to create a copy of the .qmd file to Google Docs, allowing you to edit it there and then re-download it to your local computer, and re-rendering in quarto.
+    2. You can use [trackdown](https://github.com/claudiozandonella/trackdown/) which can allow you to create a copy of the .qmd file to Google Docs, allowing you to edit it there and then re-download it to your local computer, and re-rendering in quarto. An example of this is below.
 6. Render your changes using **quarto::quarto_render('protocol_input/file_name.qmd')**, or by clicking the "Render" button in Positron or RStudio. This will generate the HTML, PDF, and Word Document versions of the protocol. They will live in the **protocoloutput/file_name** folder.
 7. Save and commit your changes. In both RStudio and Positron you can do this interactively in the IDE.
 8. Push your changes to the your version of the repository.
 9. Open a pull request on GitHub. This will allow us to review your changes and merge them into the main repository.
 10. When we are happy with a protocol, we will move it to the **finished** folder, from where it will be copied to the DanPadLab website.
-11. When copying this over, add the following code to the YAML at the top of the file, you can see an example of this here: [ecoli_sampling.qmd](protocol_output/finished/padlabnas/index.qmd):
-
-```yaml
+11. When copying this file over to **finished**, add the following code to the YAML at the top of the file, where INSERTPROTOCOLNAME is the name of file in **protocol_input**. You can see an example of this here: [ecoli_sampling.qmd](protocol_output/finished/padlabnas/index.qmd).  
 
 ```r
 format:
   html:
     other-links:
-      - text: pdf
+      - text: PDF
         href: INSERTPROTOCOLNAME.pdf
       - text: Word doc
         href: INSERTPROTOCOLNAME.docx
