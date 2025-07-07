@@ -1,8 +1,8 @@
 ---
-title: Buckling Collaborative Genome Assembly Pipeline |
-    A walkthrough for assembling high quality prokaryote genomes from long and short read sequencing
+title: Buckling Collaborative Genome Assembly Pipeline
+description: A walkthrough for assembling high quality prokaryote genomes from long and short read sequencing.
 author: Daniel Padfield
-date: "`r Sys.Date()`"
+date: 06 07 2025
 date-modified: "`r format(Sys.time(), '%d %B %Y')`"
 date-format: long
 execute: 
