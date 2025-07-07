@@ -5,6 +5,8 @@ author: Daniel padfield
 date: 07 07 2025
 date-modified: "`r format(Sys.time(), '%d %B %Y')`"
 date-format: long
+categories:
+  - computational
 execute: 
   eval: false
 ---

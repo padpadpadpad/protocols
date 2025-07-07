@@ -5,6 +5,9 @@ author: NAME ME
 date: dd MM yyyy
 date-modified: "`r format(Sys.time(), '%d %B %Y')`"
 date-format: long
+categories: 
+  - lab
+  - computational
 execute: 
   eval: false
 ---
