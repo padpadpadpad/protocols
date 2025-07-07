@@ -1,9 +1,10 @@
 - name: Copy files to another repository
   uses: nkoppel/push-files-to-another-repository@v1.1.4
-  env: API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+  env: 
+    API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
   with:
-  source-files: 'protocols_output/finished/'
-  destination-username: 'padpadpadpad'
-  destination-repository: 'padpadpadpad_quarto'
-  destination-directory: 'protocols/'
-  commit-email: 'd.padfieldscfc@gmail.com'
+    source-files: 'protocols_output/finished/'
+    destination-username: 'padpadpadpad'
+    destination-repository: 'padpadpadpad_quarto'
+    destination-directory: 'protocols/'
+    commit-email: 'd.padfieldscfc@gmail.com'
