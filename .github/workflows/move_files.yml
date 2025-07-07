@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Move files to website
-      uses: nkoppel/push-files-to-another-repository@v1.1.4
-      env: 
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-        source-files: 'protocol_output/finished/**'
-        destination-username: 'padpadpadpad'
-        destination-repository: 'padpadpadpad_quarto'
-        destination-directory: 'protocols'
-        commit-email: 'd.padfieldscfc@gmail.com'
+        uses: nkoppel/push-files-to-another-repository@v1.1.4
+        env: 
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-files: 'protocol_output/finished/**'
+          destination-username: 'padpadpadpad'
+          destination-repository: 'padpadpadpad_quarto'
+          destination-directory: 'protocols'
+          commit-email: 'd.padfieldscfc@gmail.com'
