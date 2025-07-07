@@ -26,6 +26,19 @@ The protocols in this repository are written in [Quarto](https://quarto.org/), a
 8. Push your changes to the your version of the repository.
 9. Open a pull request on GitHub. This will allow us to review your changes and merge them into the main repository.
 10. When we are happy with a protocol, we will move it to the **finished** folder, from where it will be copied to the DanPadLab website.
+11. When copying this over, add the following code to the YAML at the top of the file, you can see an example of this here: [ecoli_sampling.qmd](protocol_output/finished/padlabnas/index.qmd):
+
+```yaml
+
+```r
+format:
+  html:
+    other-links:
+      - text: pdf
+        href: index.pdf
+      - text: Word doc
+        href: index.docx
+```
 
 ## An example of using trackdown
 

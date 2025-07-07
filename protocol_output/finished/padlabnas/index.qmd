@@ -1,14 +1,20 @@
 ---
 title: Accessing PadLabNas
 description: Details for how to access and use the long-term file storage system PadLabNas.
-author: Daniel padfield
+author: Daniel Padfield
 date: 07 07 2025
-date-modified: "`r format(Sys.time(), '%d %B %Y')`"
+date-modified: '`r format(Sys.time(), ''%d %B %Y'')`'
 date-format: long
-categories:
-  - computational
-execute: 
-  freeze: true
+categories: computational
+execute:
+  eval: no
+format:
+  html:
+    other-links:
+      - text: pdf
+        href: index.pdf
+      - text: Word doc
+        href: index.docx
 ---
 
 # An introduction to using PadLabNas

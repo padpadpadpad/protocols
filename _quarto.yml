@@ -3,13 +3,14 @@ project:
   execute-dir: project
   post-render: post_render.R
 
-format: 
+format:
   html:
     toc: true
     toc-depth: 5
     code-overflow: wrap
     standalone: true
     embed-resources: true
+
   pdf:
     toc: true
     toc-depth: 5
@@ -21,6 +22,7 @@ format:
          \usepackage{fvextra}
          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
          \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+  
   docx:
     toc: true
     toc-depth: 5
