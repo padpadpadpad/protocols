@@ -76,3 +76,24 @@ for (file in files) {
   # move the file
   file.rename(file, dest_path)
 }
+
+# for any index.qmd in finished directory, change
+# execute: eval: false to execute: freeze
+finished_files <- list.files(
+  'protocol_output/finished',
+  full.names = TRUE,
+  pattern = "index.qmd",
+  recursive = TRUE
+)
+
+# change eval: false to eval: freeze
+for (file in finished_files) {
+  # read the file
+  content <- readLines(file)
+
+  # replace eval: false with eval: freeze
+  content <- gsub("eval: false", "freeze: true", content)
+
+  # write the file back
+  writeLines(content, file)
+}
