@@ -44,13 +44,13 @@ for (file in files) {
   }
 }
 
-# copy input files into the right directory, rename them index.qmd
+# copy input files into the right directory
 for (file in files) {
   # get the file name without extension
   file_name <- basename(file) |> tools::file_path_sans_ext()
 
   # create the destination path
-  dest_path <- file.path('protocol_output', file_name, 'index.qmd')
+  dest_path <- file.path('protocol_output', file_name, basename(file))
 
   # copy the file to the destination path
   file.copy(file, dest_path, overwrite = TRUE)

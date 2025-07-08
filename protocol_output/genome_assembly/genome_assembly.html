@@ -2197,6 +2197,7 @@ vertical-align: -.125em;
   <li><a href="#creating-multiple-assemblies" id="toc-creating-multiple-assemblies" class="nav-link" data-scroll-target="#creating-multiple-assemblies">Creating multiple assemblies</a></li>
   <li><a href="#manual-checking-of-assemblies" id="toc-manual-checking-of-assemblies" class="nav-link" data-scroll-target="#manual-checking-of-assemblies">Manual checking of assemblies</a></li>
   <li><a href="#finding-a-consensus-assembly" id="toc-finding-a-consensus-assembly" class="nav-link" data-scroll-target="#finding-a-consensus-assembly">Finding a consensus assembly</a></li>
+  <li><a href="#reorient-assembly" id="toc-reorient-assembly" class="nav-link" data-scroll-target="#reorient-assembly">Reorient assembly</a></li>
   <li><a href="#polishing-the-assembly" id="toc-polishing-the-assembly" class="nav-link" data-scroll-target="#polishing-the-assembly">Polishing the assembly</a></li>
   <li><a href="#check-assembly-using-shortreads" id="toc-check-assembly-using-shortreads" class="nav-link" data-scroll-target="#check-assembly-using-shortreads">Check assembly using shortreads</a></li>
   <li><a href="#annotate-assembly" id="toc-annotate-assembly" class="nav-link" data-scroll-target="#annotate-assembly">Annotate assembly</a></li>
@@ -2239,7 +2240,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 7, 2025</p>
+      <p class="date-modified">July 8, 2025</p>
     </div>
   </div>
     
@@ -2308,7 +2309,7 @@ vertical-align: -.125em;
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>conda install <span class="sc">-</span>c conda<span class="sc">-</span>forge tmux</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># install all the tools used in the pipeline - ADD OR REMOVE AS NEEDED</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>conda create <span class="sc">-</span>n autocycler <span class="sc">-</span>c conda<span class="sc">-</span>forge <span class="sc">-</span>c bioconda <span class="sc">-</span>c defaults autocycler canu flye metamdbg miniasm necat raven<span class="sc">-</span>assembler plassembler nextdenovo nextpolish fastp filtlong sourmash seqkit</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>conda create <span class="sc">-</span>n autocycler <span class="sc">-</span>c conda<span class="sc">-</span>forge <span class="sc">-</span>c bioconda <span class="sc">-</span>c defaults autocycler canu flye metamdbg miniasm necat raven<span class="sc">-</span>assembler plassembler nextdenovo nextpolish fastp filtlong sourmash seqkit dnappler</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># we also need to install a database for plassembler and make it available to the conda environment</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>conda activate autocycler</span>
@@ -2481,8 +2482,8 @@ vertical-align: -.125em;
 <span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
 <span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">filename =</span> file,</span>
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">n_seqs =</span> num_sequences,</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">length_seq =</span> length_seq,</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">longest_circular =</span> is_circular</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">length_longest_seq =</span> length_seq,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">is_circular =</span> is_circular</span>
 <span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
@@ -2495,13 +2496,13 @@ vertical-align: -.125em;
 </div>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 27%">
-<col style="width: 8%">
-<col style="width: 13%">
-<col style="width: 19%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2510,8 +2511,8 @@ vertical-align: -.125em;
 <th>subsample</th>
 <th>filename</th>
 <th>n_seqs</th>
-<th>length_seq</th>
-<th>longest_circular</th>
+<th>length_longest_seq</th>
+<th>is_circular</th>
 </tr>
 </thead>
 <tbody>
@@ -2593,13 +2594,183 @@ vertical-align: -.125em;
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    fi</span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you expect plasmids, you may want to adjust these criteria.</p>
+<p>After filtering, we can re run the R code to check the sequences in the filtered assemblies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list all assembly files, needs to be in fasta format</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>assembly_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;assemblies/filtered_assemblies&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;.fasta&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> assembly_files <span class="sc">%&gt;%</span> <span class="fu">map_df</span>(get_assembly_info)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># separate the filename</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> <span class="fu">separate_wider_delim</span>(info, filename, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;sample&quot;</span>, <span class="st">&quot;assembler&quot;</span>, <span class="st">&#39;subsample&#39;</span>), <span class="at">delim =</span> <span class="st">&quot;_&quot;</span>, <span class="at">too_many =</span> <span class="st">&quot;merge&quot;</span>, <span class="at">cols_remove =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>sample</th>
+<th>assembler</th>
+<th>subsample</th>
+<th>filename</th>
+<th>n_seqs</th>
+<th>length_longest_seq</th>
+<th>is_circular</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>307501E</td>
+<td>canu</td>
+<td>sample_01_filtered</td>
+<td>307501E_canu_…</td>
+<td>1</td>
+<td>4638966</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>307501E</td>
+<td>canu</td>
+<td>sample_02_filtered</td>
+<td>307501E_canu_…</td>
+<td>1</td>
+<td>4638967</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td>307501E</td>
+<td>canu</td>
+<td>sample_03_filtered</td>
+<td>307501E_canu_…</td>
+<td>1</td>
+<td>4711070</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>307501E</td>
+<td>canu</td>
+<td>sample_04_filtered</td>
+<td>307501E_canu_…</td>
+<td>1</td>
+<td>4638967</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td>307501E</td>
+<td>flye</td>
+<td>sample_01_filtered</td>
+<td>307501E_flye_…</td>
+<td>1</td>
+<td>4638969</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>307501E</td>
+<td>flye</td>
+<td>sample_02_filtered</td>
+<td>307501E_flye_…</td>
+<td>1</td>
+<td>4638955</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>From this filtering process, you may lose some samples that do not pass this QC, but this is fine as long as you still have several assemblies to work with.</p>
+<p>If you expect plasmids, you may want to adjust these criteria. In our case we have plasmids of interest (R1 and RP4) that are between 50,000 and 100,000 bp in length. We can filter the assemblies to keep only those that are within this range. This can be done using <strong>seqkit</strong> again, but this time we will use the <code>-m</code> and <code>-M</code> options to specify the minimum and maximum length of the sequences to keep.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># our plasmids are between 50000 and 100000bp</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># run for loop to filter assemblies</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> assemblies<span class="sc">/</span><span class="er">*</span>.fasta; do</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the filename without the extension</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    filename<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fasta})</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter the fasta file based on expected genome size</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    seqkit seq <span class="sc">-</span>g <span class="sc">-</span>m <span class="dv">50000</span> <span class="sc">-</span>M <span class="dv">110000</span> <span class="st">&quot;$file&quot;</span> <span class="sc">&gt;</span> <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered.fasta&quot;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if the filtered file is empty, remove it</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> [ <span class="sc">!</span> <span class="sc">-</span>s <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered_plasmid.fasta&quot;</span> ]; then</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        rm <span class="sc">-</span>f <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered_plasmid.fasta&quot;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    fi</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We are now ready to proceed to the next steps of the pipeline, actually using the <strong>autocycler</strong> commands. At this stage you may want to manually separate your assemblies into individual folders. This should all be much less computationally intensive than the previous steps, so you can probably easily run these on your local machine.</p>
 </section>
 <section id="finding-a-consensus-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="finding-a-consensus-assembly">Finding a consensus assembly</h2>
+<p>We follow the steps as documented by <a href="https://www.biorxiv.org/content/10.1101/2025.05.12.653612v1"><strong>Autocycler</strong></a>. The <a href="https://github.com/rrwick/Autocycler/wiki">Wiki pages</a> are extremely useful and I am mainly summarising content from there. They contain lots of FAQs and troubleshooting tips if you come into trouble.</p>
+<p>First<a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-compress"><strong>autocycler compress</strong></a> uses the input assemblies to build a compacted De Bruijn graph (a.k.a. a unitig graph). This command takes an input directory named <strong>filtered/assemblies</strong> which contains the input assemblies in FASTA format. It will create the <strong>debruijn</strong> directory which will contain the graph as file named <strong>input_assemblies.gfa</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler compress to create a de bruijn graph of all the assemblies</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>autocycler compress <span class="sc">-</span>i assemblies<span class="sc">/</span>filtered_assemblies <span class="sc">-</span>a assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, <a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-cluster"><strong>autocycle cluster</strong></a> groups input contigs into clusters. A cluster is a group of contigs which represent the same genomic sequence. It also decides which of these clusters should be included in the final assembly (QC-pass) and which should not (QC-fail). This command takes a directory created by <strong>autocycler compress</strong> (named <strong>debruijn</strong> in the example) which must contain an <strong>input_assemblies.gfa</strong> file. It will create a subdirectory named <strong>clustering</strong> which in turn contains a <strong>qc_pass</strong> directory for the good clusters and a <strong>qc_fail</strong> directory for the bad clusters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler cluster to see which bits of the assembly should be included in the final assembly</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>autocycler cluster <span class="sc">-</span>a assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-trim"><strong>autocycler trim</strong></a> then trims excess sequences that can be present in long read contigs. This command goes through each cluster and trims each contig looking for hairpin and start-end circular overlaps. At the end of this step, remaining contigs in each cluster are in close agreement to each other.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler trim to get rid of excess repetitive sequences</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="cf">in</span> assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn<span class="sc">/</span>clustering<span class="sc">/</span>qc_pass<span class="sc">/</span>cluster_<span class="sc">*</span>; do</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    autocycler trim <span class="sc">-</span>c <span class="st">&quot;$c&quot;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-resolve"><strong>autocyler resolve</strong></a> aims to resolve repeats and ambiguities in each cluster. By the end of it, hopefully there is a single consentig for each cluster. This command runs through each cluster in <strong>qc_pass</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler resolve to resolve repeats and ambiguities in each cluster</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="cf">in</span> assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn<span class="sc">/</span>clustering<span class="sc">/</span>qc_pass<span class="sc">/</span>cluster_<span class="sc">*</span>; do</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    autocycler resolve <span class="sc">-</span>c <span class="st">&quot;$c&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, the resolved sequences for each cluster are combined into a single assembly. This command takes an autocycler directory (<strong>debuijn</strong> in this example) and one or more cluster graphs (typically <strong>5_final.gfa</strong>) and creates <strong>consensus_assembly.fasta</strong> and <strong>consensus_assembly.gfa</strong> files in the <strong>debuijn</strong> directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine the resolved sequences into a final assembly</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>autocycler combine <span class="sc">-</span>a assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>RP4<span class="sc">/</span>debruijn <span class="sc">-</span>i assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>RP4<span class="sc">/</span>debruijn<span class="sc">/</span>clustering<span class="sc">/</span>qc_pass<span class="sc">/</span>cluster_<span class="sc">*</span><span class="er">/</span><span class="dv">5</span>_final.gfa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If this has worked, you will hopefully receive the message.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Consensus assembly is fully resolved 😄</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can check the output of <strong>autocycler combine</strong> by looking at the <strong>consensus_assembly.gfa</strong> in Bandage. You can also look at the <strong>consensus_assembly.yaml</strong> file which contains the following information:</p>
+<ul>
+<li>consensus_assembly_bases: 4638969</li>
+<li>consensus_assembly_unitigs: 1</li>
+<li>consensus_assembly_fully_resolved: true</li>
+<li>consensus_assembly_clusters:
+<ul>
+<li>length: 4638969</li>
+<li>unitigs: 1</li>
+<li>topology: circular</li>
+</ul></li>
+</ul>
+<p>It is important to have a single unitig, for the assembly to be fully resolved, and you want the topology to be circular. If this is not the case, you can try running <a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-clean"><strong>autocycler clean</strong></a>.</p>
+</section>
+<section id="reorient-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="reorient-assembly">Reorient assembly</h2>
+<p><a href="https://github.com/gbouras13/dnaapler">Dnaapler</a> is a tool for reorienting complete microbial genome assemblies so that each sequence starts at a consistent location – commonly at a gene like dnaA or repA. You can run Dnaapler on an Autocycler consensus assembly to reorient its sequences which can make downstream steps like annotation or submission easier, and allow easier comparison between strains.</p>
+<p>The command <strong>dnaapler all</strong> works for prokaryote genomes, and <strong>dnaapler plasmid</strong> for plasmids. All of the options are the same and it is important to use the <strong>.gfa</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run dnaapler to reorient the assembly</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dnaapler all <span class="sc">-</span>i assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>consensus_assembly.gfa  <span class="sc">-</span>o assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>dnaapler <span class="sc">-</span>p ecoli_mg1655 <span class="sc">-</span>t <span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="polishing-the-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="polishing-the-assembly">Polishing the assembly</h2>
+<p>Since Autocycler assemblies are long-read-only, they may still contain small-scale errors produced by systematic errors in the reads.</p>
+<p>If you are assembling Oxford Nanopore reads, performing long-read polishing with <a href="https://github.com/nanoporetech/medaka">Medaka</a> can help. For PacBio reads you could use <a href="https://github.com/isovic/racon">Racon</a></p>
+<p>If you also have short reads, there are many tools. Ryan Wick recommends Polypolish and Pypolca, both of which are conservative (unlikely to introduce new errors).</p>
+<p>A paper benchmarking different polishing tools can be found <a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-024-10582-x#Sec41">here</a>.</p>
+<p>This command runs <strong>medaka</strong> and then <strong>Polypolish</strong> on the consensus assembly.</p>
 </section>
 <section id="check-assembly-using-shortreads" class="level2">
 <h2 class="anchored" data-anchor-id="check-assembly-using-shortreads">Check assembly using shortreads</h2>

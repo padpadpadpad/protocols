@@ -10,6 +10,30 @@ categories:
   - computational
 execute: 
   eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+    standalone: true
+    embed-resources: true
+
+  pdf:
+    toc: true
+    toc-depth: 5
+    fontsize: 14pt
+    code-overflow: wrap
+    keep-tex: false
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+  
+  docx:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
 ---
 
 # Write about your protocol here.
