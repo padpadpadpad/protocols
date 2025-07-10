@@ -92,13 +92,16 @@ conda config --set channel_priority strict
 conda install -c conda-forge tmux
 
 # install all the tools used in the pipeline - ADD OR REMOVE AS NEEDED
-conda create -n autocycler -c conda-forge -c bioconda -c defaults autocycler canu flye metamdbg miniasm necat raven-assembler plassembler nextdenovo nextpolish fastp filtlong sourmash seqkit dnappler
+conda create -n autocycler -c conda-forge -c bioconda -c defaults autocycler canu flye metamdbg miniasm necat raven-assembler plassembler nextdenovo nextpolish fastp filtlong sourmash seqkit dnappler polypolish
 
 # we also need to install a database for plassembler and make it available to the conda environment
 conda activate autocycler
 plassembler download -d ~/databases/plassembler
 conda env config vars set PLASSEMBLER_DB=~/databases/plassembler
 conda deactivate
+
+# if you have a package that cannot be installed due to a conflict, you can create a new environment for that package
+conda create -n medaka -c nanoporetech medaka
 ```
 
 ## Check for contamination
@@ -427,13 +430,13 @@ Consensus assembly is fully resolved 😄
 
 You can check the output of **autocycler combine** by looking at the **consensus_assembly.gfa** in Bandage. You can also look at the **consensus_assembly.yaml** file which contains the following information:
 
-- consensus_assembly_bases: 4638969 
-- consensus_assembly_unitigs: 1 
-- consensus_assembly_fully_resolved: true 
-- consensus_assembly_clusters: 
-    - length: 4638969 
-    - unitigs: 1 
-    - topology: circular
+-   consensus_assembly_bases: 4638969
+-   consensus_assembly_unitigs: 1
+-   consensus_assembly_fully_resolved: true
+-   consensus_assembly_clusters:
+    -   length: 4638969
+    -   unitigs: 1
+    -   topology: circular
 
 It is important to have a single unitig, for the assembly to be fully resolved, and you want the topology to be circular. If this is not the case, you can try running [**autocycler clean**](https://github.com/rrwick/Autocycler/wiki/Autocycler-clean).
 
@@ -441,11 +444,15 @@ It is important to have a single unitig, for the assembly to be fully resolved, 
 
 [Dnaapler](https://github.com/gbouras13/dnaapler) is a tool for reorienting complete microbial genome assemblies so that each sequence starts at a consistent location – commonly at a gene like dnaA or repA. You can run Dnaapler on an Autocycler consensus assembly to reorient its sequences which can make downstream steps like annotation or submission easier, and allow easier comparison between strains.
 
-The command **dnaapler all** works for prokaryote genomes, and **dnaapler plasmid** for plasmids. All of the options are the same and it is important to use the **.gfa**.
+The command **dnaapler all** works for prokaryote genomes, and **dnaapler plasmid** for plasmids. All of the options are the same and it is important to use the **.gfa**. The example code runs **dnaapler all** on the consensus assembly created by autocycler, and creates an output file called **reoriented.gfa**.
+
+It then uses **autocycler gfa2fasta** to convert the reoriented GFA file to a FASTA file. This is required for downstream steps like polishing and annotation.
 
 ```{r reorient_assembly}
 # run dnaapler to reorient the assembly
-dnaapler all -i assemblies/filtered_assemblies/ecoli/debruijn/consensus_assembly.gfa  -o assemblies/filtered_assemblies/ecoli/debruijn/dnaapler -p ecoli_mg1655 -t 8
+dnaapler all -i assemblies/filtered_assemblies/ecoli/debruijn/consensus_assembly.gfa  -o assemblies/filtered_assemblies/ecoli/debruijn/dnaapler -t 8
+
+autocycler gfa2fasta -i assemblies/filtered_assemblies/ecoli/debruijn/dnaapler/reoriented.gfa -o assemblies/filtered_assemblies/ecoli/debruijn/dnaapler/reoriented.fasta
 ```
 
 ## Polishing the assembly
@@ -458,12 +465,48 @@ If you also have short reads, there are many tools. Ryan Wick recommends Polypol
 
 A paper benchmarking different polishing tools can be found [here](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-024-10582-x#Sec41).
 
-This command runs **medaka** and then **Polypolish** on the consensus assembly.
+This command runs **medaka** and then **Polypolish** on the reoriented assembly.
 
-## Check assembly using shortreads
+```{r polish_assembly}
+# if you have issues installing medaka into the autocycler environment, you can install it into a separate environment
+
+# create a folder to place the polished the assemblies
+mkdir -p assemblies/filtered_assemblies/ecoli/debruijn/polished
+
+# set up arguments needed for medaka
+long_reads=strain_data/sequencing/hybrid_sequencing/long_reads/trimmed/307501E.fastq.gz
+assembly=assemblies/filtered_assemblies/ecoli/debruijn/dnaapler/reoriented.fasta
+outdir=assemblies/filtered_assemblies/ecoli/debruijn/polished
+
+# run medaka
+medaka_consensus -i ${long_reads} -d ${assembly} -o ${outdir} -t 4 --bacteria
+
+# move environments as needed
+conda deactivate
+conda activate autocycler
+
+# run polypolish
+
+#
+assembly=consensus.fasta
+short_read_fwd=/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_1_trimmed.fastq.gz
+short_read_rev='/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_2_trimmed.fastq.gz'
+
+cd assemblies/filtered_assemblies/ecoli/debruijn/polished
+
+bwa index consensus.fasta
+bwa mem -t 16 -a consensus.fasta $short_read_fwd > alignments_1.sam
+bwa mem -t 16 -a consensus.fasta $short_read_rev > alignments_2.sam
+polypolish filter --in1 alignments_1.sam --in2 alignments_2.sam --out1 filtered_1.sam --out2 filtered_2.sam
+polypolish polish --careful consensus.fasta filtered_1.sam filtered_2.sam > polished.fasta
+rm *.amb *.ann *.bwt *.pac *.sa *.sam
+
+```
 
 ## Annotate assembly
 
+
+
 ## Check quality
 
-##
+## 

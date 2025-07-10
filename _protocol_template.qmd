@@ -3,7 +3,7 @@ title: Protocol name
 description: Describe what the protocol does here.
 author: NAME ME
 date: dd MM yyyy
-date-modified: "`r format(Sys.time(), '%d %B %Y')`"
+date-modified: last-modified
 date-format: long
 categories: 
   - lab

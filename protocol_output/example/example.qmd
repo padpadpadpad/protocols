@@ -1,0 +1,19 @@
+---
+title: Calling genetic variants with **breseq**
+description: Describe what the protocol does here.
+author: Daniel Padfield
+date: 10 07 2025
+date-modified: "`r format(Sys.time(), '%d %B %Y')`"
+date-format: long
+categories: 
+  - computational
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+    standalone: true
+    embed-resources: true
+---
+
+# Outline
