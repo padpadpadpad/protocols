@@ -124,6 +124,9 @@ conda activate breseq_env
 # set working directory to where the short reads are
 wd=short_reads
 
+# make fastp reports folder
+mkdir -p "$wd/fastp_reports"
+
 # look at one file to look for read length
 file=$wd/307504_NalR2_1_trimmed.fastq.gz
 seqkit stats $file

@@ -2304,23 +2304,26 @@ vertical-align: -.125em;
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory to where the short reads are</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>wd<span class="ot">=</span>short_reads</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># look at one file to look for read length</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>file<span class="ot">=</span><span class="er">$</span>wd<span class="sc">/</span><span class="dv">307504</span>_NalR2_1_trimmed.fastq.gz</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>seqkit stats <span class="sc">$</span>file</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastp on all the short reads</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> <span class="sc">$</span>wd<span class="sc">/</span><span class="er">*</span><span class="dv">1</span>_trimmed.fastq.gz; do</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make fastp reports folder</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p <span class="st">&quot;$wd/fastp_reports&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># look at one file to look for read length</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>file<span class="ot">=</span><span class="er">$</span>wd<span class="sc">/</span><span class="dv">307504</span>_NalR2_1_trimmed.fastq.gz</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>seqkit stats <span class="sc">$</span>file</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    fwd<span class="ot">=</span><span class="er">$</span>file</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># replace 1_trimmed.fastq.gz with 2_trimmed.fastq.gz to get the reverse read</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    rev<span class="ot">=</span><span class="er">$</span>{fwd%<span class="dv">1</span>_trimmed.fastq.gz}<span class="dv">2</span>_trimmed.fastq.gz</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $fwd</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $rev</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastp on all the short reads</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> <span class="sc">$</span>wd<span class="sc">/</span><span class="er">*</span><span class="dv">1</span>_trimmed.fastq.gz; do</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    fwd<span class="ot">=</span><span class="er">$</span>file</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># replace 1_trimmed.fastq.gz with 2_trimmed.fastq.gz to get the reverse read</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    rev<span class="ot">=</span><span class="er">$</span>{fwd%<span class="dv">1</span>_trimmed.fastq.gz}<span class="dv">2</span>_trimmed.fastq.gz</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run fastp on the file</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    fastp <span class="sc">-</span>i <span class="sc">$</span>fwd <span class="sc">-</span>I <span class="sc">$</span>rev <span class="sc">-</span>o  <span class="st">&quot;$wd/trimmed/$(basename $fwd)&quot;</span> <span class="sc">-</span>O <span class="st">&quot;$wd/trimmed/$(basename $rev)&quot;</span> <span class="sc">-</span>w <span class="dv">4</span> <span class="sc">--</span>detect_adapter_for_pe <span class="sc">-</span>l <span class="dv">237</span> <span class="sc">-</span>q <span class="dv">30</span> <span class="sc">-</span>j <span class="st">&quot;$wd/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.json)&quot;</span> <span class="sc">-</span>h <span class="st">&quot;$wd/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.html)&quot;</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $fwd</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $rev</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run fastp on the file</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    fastp <span class="sc">-</span>i <span class="sc">$</span>fwd <span class="sc">-</span>I <span class="sc">$</span>rev <span class="sc">-</span>o  <span class="st">&quot;$wd/trimmed/$(basename $fwd)&quot;</span> <span class="sc">-</span>O <span class="st">&quot;$wd/trimmed/$(basename $rev)&quot;</span> <span class="sc">-</span>w <span class="dv">4</span> <span class="sc">--</span>detect_adapter_for_pe <span class="sc">-</span>l <span class="dv">237</span> <span class="sc">-</span>q <span class="dv">30</span> <span class="sc">-</span>j <span class="st">&quot;$wd/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.json)&quot;</span> <span class="sc">-</span>h <span class="st">&quot;$wd/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.html)&quot;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can then look at the output in <strong>fastp_reports</strong>. Or run <strong>seqkit stats</strong> on the filtered files.</p>
 <div class="cell">
