@@ -2367,7 +2367,7 @@ vertical-align: -.125em;
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Downloads</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run a test download using copy</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># downloads test from PadLabNas into your local machine to a folder. Adding /test at the end of the destination creates the folder on your machine._</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># downloads test from PadLabNas into your local machine to a folder. Adding /test at the end of the destination creates the folder on your machine.</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> copy PadLabNas:BucklingCollaborative/test ~/Downloads/test <span class="at">--progress</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># move test onto PadLabNas</span></span>
@@ -2376,7 +2376,7 @@ vertical-align: -.125em;
 <p>An example of moving a folder from PadLabNas to another remote server is below. This example assumes you are logged in to the remote server (e.g. RStudio server). It is important to write absolute paths and not use <strong>~</strong> to denote relative file paths.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move test folder from PadLabNas to remote server</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> copy /volume1/BucklingCollaborative/test rstudio_server:/home2/ISAD/dp415/test <span class="at">--verbose</span> <span class="at">--progress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> copy PadLabNas:BucklingCollaborative/test /home2/ISAD/dp415/test <span class="at">--verbose</span> <span class="at">--progress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="share-folders-with-a-share-link" class="level3">

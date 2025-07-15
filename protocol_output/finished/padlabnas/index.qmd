@@ -150,7 +150,7 @@ rclone lsd PadLabNas:
 cd ~/Downloads
 
 # run a test download using copy
-# downloads test from PadLabNas into your local machine to a folder. Adding /test at the end of the destination creates the folder on your machine._
+# downloads test from PadLabNas into your local machine to a folder. Adding /test at the end of the destination creates the folder on your machine.
 rclone copy PadLabNas:BucklingCollaborative/test ~/Downloads/test --progress
 
 # move test onto PadLabNas
@@ -162,7 +162,7 @@ An example of moving a folder from PadLabNas to another remote server is below. 
 
 ```{bash}
 # move test folder from PadLabNas to remote server
-rclone copy /volume1/BucklingCollaborative/test rstudio_server:/home2/ISAD/dp415/test --verbose --progress
+rclone copy PadLabNas:BucklingCollaborative/test /home2/ISAD/dp415/test --verbose --progress
 ```
 
 ### Share folders with a Share Link
