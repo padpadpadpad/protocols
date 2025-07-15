@@ -2239,7 +2239,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 7, 2025</p>
+      <p class="date-modified">July 15, 2025</p>
     </div>
   </div>
     
@@ -2327,18 +2327,18 @@ vertical-align: -.125em;
 </section>
 <section id="rclone" class="level3">
 <h3 class="anchored" data-anchor-id="rclone">rclone</h3>
-<p>Programmatically move files using <strong>rclone</strong>. <a href="https://rclone.org/"><strong>rclone</strong></a> is useful to move individual files and folders between servers or to and from your local machine. If moving to or from your local machine, this can be done on the command line, if moving to or from PadLabNas to another server (e.g. Athena, Carson, Isca, RStudio), you will need to SSH into PadLabNas.</p>
-<p>First you will need to set up <strong>rclone</strong>. Open your terminal. On both your local machine and the PadLabNas (if needed), you need to create a <em>config</em> file which stores the details of the remotes you want to move files between. On your local machine, I recommend adding <strong>PadLabNas</strong> and any of the other servers you use. For <strong>PadLabNas</strong> I recommend adding other servers as you need to.</p>
+<p>Programmatically move files using <strong>rclone</strong>. <a href="https://rclone.org/"><strong>rclone</strong></a> is useful to move individual files and folders between servers or to and from your local machine. If moving to or from your local machine, this can be done on the command line, if moving to or from PadLabNas to another server (e.g. Athena, Carson, Isca, RStudio), you will need to ssh into the other server, and install <strong>rclone</strong> using <a href="https://anaconda.org/conda-forge/rclone"><strong>conda</strong></a> in your base environment.</p>
+<p>First you will need to set up <strong>rclone</strong>. Open your terminal. On your local machine (and any remote server you are also using), you need to create a <em>config</em> file which stores the details of the PadLabNas (and any other remotes) you want to move files between. When moving files between PadLabNas and another remote, you will need to SSH into the remote first and add a config file to the remote server.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ssh in PadLabNas (if needed)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ssh USERNAME<span class="sc">@</span>ipaddresshere <span class="sc">-</span>p <span class="dv">22</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ssh in PadLabNas (if needed)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> USERNAME@ipaddresshere <span class="at">-p</span> 22</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check _rclone_ is installed</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rclone –version</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> –version</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># if not install rclone (on your local machine)</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add a remote</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>rclone config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will start an interactive command in your terminal to add a new remote. To set this up:</p>
 <ol type="1">
@@ -2351,27 +2351,32 @@ vertical-align: -.125em;
 </ol>
 <p>To be able to move files to and from PadLabNas easily, we need to manually edit the config file. First we need to know where the config file is.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># local rclone config file</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rclone config file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># local rclone config file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> config file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Will tell you where your config file is stored. Open it. In the <strong>[PadLabNas]</strong> section add <strong>path_override = @/volume1/</strong> on a new line. Save and close the file.</p>
 <p>We are now ready to move folders and files programmitically. Some useful usecases are below. <a href="https://rclone.org/docs/">rclone</a> docs are useful for writing commands. ChatGPT or Claude AI may also be useful for this. Some example commands are below. Adding <em>–dry-run</em> to your copy commands will give you output of what <em>rclone copy</em> will do without moving any files.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list available remotes</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rclone listremotes</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list available remotes</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> listremotes</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># view directories of a remote_</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>rclone lsd PadLabNas<span class="sc">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> lsd PadLabNas:</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># move to where you want to move the folder too</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Downloads</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Downloads</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run a test download using copy</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># downloads test from PadLabNas into your local machine to a folder. Adding /test at the end of the destination creates the folder on your machine._</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>rclone copy PadLabNas<span class="sc">:</span>BucklingCollaborative<span class="sc">/</span>test <span class="sc">~</span><span class="er">/</span>Downloads<span class="sc">/</span>test <span class="sc">--</span>progress</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> copy PadLabNas:BucklingCollaborative/test ~/Downloads/test <span class="at">--progress</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># move test onto PadLabNas</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>rclone copy <span class="sc">~</span><span class="er">/</span>Downloads<span class="sc">/</span>test <span class="sc">--</span>progress PadLabNas<span class="sc">:</span>BucklingCollaborative<span class="sc">/</span>test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> copy ~/Downloads/test <span class="at">--progress</span> PadLabNas:BucklingCollaborative/test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>An example of moving a folder from PadLabNas to another remote server is below. This example assumes you are logged in to the remote server (e.g. RStudio server). It is important to write absolute paths and not use <strong>~</strong> to denote relative file paths.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move test folder from PadLabNas to remote server</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rclone</span> copy /volume1/BucklingCollaborative/test rstudio_server:/home2/ISAD/dp415/test <span class="at">--verbose</span> <span class="at">--progress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="share-folders-with-a-share-link" class="level3">
@@ -2380,34 +2385,34 @@ vertical-align: -.125em;
 <p>If you want them to be able to download it through a server (e.g. RStudio server) or programmatically generally, the process is slightly more involved. You can download an example script for this <a href="https://universityofexeteruk.sharepoint.com/:u:/s/BucklingMassive/EVV5lfgYBE9DiFTg4dVlY3gBYfHd4I5nefPi85Bsnjccyw?e=Ce4wLQ">here.</a>, but the code is also below. <strong>If it is a folder, make sure it is compressed to a .zip file by Right Click Compress to .zip</strong>. Create a Share Link as above. Send Share link with recipient.</p>
 <p>The following code is for the recipient. Open the Terminal Client.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check curl is installed</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>curl <span class="sc">--</span>version</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Move into correct directory to download the file or zip folder.  </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">~</span><span class="er">/</span>Downloads</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Sharing Link, NAS address, and file name. You may need to change these bits.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># sharing link_</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>sharing_link<span class="ot">=</span>https<span class="sc">:</span><span class="er">//</span>gofile.me<span class="sc">/</span><span class="dv">7</span>EFXM<span class="sc">/</span>HwTkOww2x</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># PadLabNAS address</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>nas<span class="ot">=</span>https<span class="sc">:</span><span class="er">//</span>padlabnas.synology.me<span class="sc">:</span><span class="dv">5001</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># filename</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>filename<span class="ot">=</span><span class="st">&quot;test.zip&quot;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a file that allows curl to talk to the Sharing Link properly. We call it cookies.txt. You can just copy and paste this code.</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>curl <span class="sc">-</span>k <span class="sc">-</span>c cookies.txt <span class="sc">-</span>b cookies.txt <span class="st">&quot;$nas/sharing/$(basename &quot;</span><span class="sc">$</span>sharing_link<span class="st">&quot;)&quot;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Download the file using curl and remove cookies.txt. Just copy and paste this code.</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>curl <span class="sc">-</span>k <span class="sc">-</span>b cookies.txt <span class="sc">-</span>L <span class="sc">-</span>O <span class="st">&quot;$nas/fsdownload/$(basename &quot;</span><span class="sc">$</span>sharing_link<span class="st">&quot;)/$filename&quot;</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># remove cookies file_</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>rm cookies.txt</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip the folder if you want to!</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>unzip <span class="st">&quot;$filename&quot;</span> <span class="sc">-</span>d <span class="sc">~</span><span class="er">/</span>Downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check curl is installed</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">--version</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Move into correct directory to download the file or zip folder.  </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Downloads</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Sharing Link, NAS address, and file name. You may need to change these bits.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># sharing link_</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="va">sharing_link</span><span class="op">=</span>https://gofile.me/7EFXM/HwTkOww2x</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># PadLabNAS address</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="va">nas</span><span class="op">=</span>https://padlabnas.synology.me:5001</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># filename</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="va">filename</span><span class="op">=</span><span class="st">&quot;test.zip&quot;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a file that allows curl to talk to the Sharing Link properly. We call it cookies.txt. You can just copy and paste this code.</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-k</span> <span class="at">-c</span> cookies.txt <span class="at">-b</span> cookies.txt <span class="st">&quot;</span><span class="va">$nas</span><span class="st">/sharing/</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">&quot;</span><span class="va">$sharing_link</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Download the file using curl and remove cookies.txt. Just copy and paste this code.</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-k</span> <span class="at">-b</span> cookies.txt <span class="at">-L</span> <span class="at">-O</span> <span class="st">&quot;</span><span class="va">$nas</span><span class="st">/fsdownload/</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">&quot;</span><span class="va">$sharing_link</span><span class="st">&quot;</span><span class="va">)</span><span class="st">/</span><span class="va">$filename</span><span class="st">&quot;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># remove cookies file_</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> cookies.txt</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip the folder if you want to!</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span> <span class="at">-d</span> ~/Downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
