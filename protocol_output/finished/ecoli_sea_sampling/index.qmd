@@ -1,0 +1,83 @@
+---
+title: How clean is the sea? Sampling seawater. 
+description: A protocol for standardising the sampling of seawater around Falmouth for plating for _E. coli_
+author: Daniel Padfield
+date: 07 07 2025
+date-modified: last-modified
+date-format: long
+categories:
+  - lab
+execute: 
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+    standalone: true
+    embed-resources: true
+
+  pdf:
+    toc: true
+    toc-depth: 5
+    fontsize: 14pt
+    code-overflow: wrap
+    keep-tex: false
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+  
+  docx:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+---
+
+## Outline
+
+This describes a standardised method for water sampling for investigating sewage pollution in the Fal estuary and other areas in Cornwall.
+
+The equipment will be provided by your supervisors.
+
+## Materials and Equipment
+
+* Ethanol-resistant marker pen for labelling tubes
+* A bucket
+* 50 mL falcon tubes
+* Nitrile gloves.
+ 
+## Method
+
+1. Label three 50 mL falcon tubes with your initials, the time and date, and the what3words location of where you are sampling. You can download the app for your Android or iPhone easily from here.
+2. Take a surface sample of seawater using the bucket from as far from the shoreline as practical and safe.
+3. Mix by swirling the contents of the bucket immediately and fill a 50 mL falcon tubes to the neck by immersing the tube in the bucket. Do not allow the contents of the bucket to settle before filling the bottle. Close the lid of the falcon tubes tightly.
+4. Empty the bucket back into the sea.
+5. Repeat steps 2-4 three times at each sampling event.
+6. By the end you should have 3 falcon tubes every time you sample.
+7. Place the samples in a cool bag, store them in the cold room at 4ºC as quickly as possible.
+8. Plate within 4 days.
+
+## Metadata collection
+
+In addition to water sampling, the following data should be collected at the time of each sampling event. This should be recorded to this spreadsheet. If you do not have access please email Daniel Padfield to d.padfield@exeter.ac.uk.
+
+* Date and time of sampling
+* Name(s) of person(s) collecting the samples
+* What3words location (you can download the app)
+* Next high tide (https://www.tidetimes.co.uk/falmouth-tide-times)
+* Next low tide (https://www.tidetimes.co.uk/falmouth-tide-times)
+  
+## Health and safety advice
+
+* If you are undergraduate, make sure you are in pairs whenever you are sampling.
+* Do not sample from surfaces where you can slip off (mossy rocks, etc).
+* Do not sample during stormy weather.
+* Wear gloves when sampling. This is both to protect you from contaminating the sample, but also yourself from potential pathogens. 
+* Be mindful of the pollution status of sampling sites (for example if there has been a recent) sewage discharge event.
+* Make sure you wash your hands before - and especially after - sampling.
+
+## References
+
+* Food standards agency protocol for water sampling near shellfish production areas. https://www.food.gov.uk/sites/default/files/media/document/sampling-protocol-water-samples-july-2020.pdf
