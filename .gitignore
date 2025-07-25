@@ -4,5 +4,6 @@
 .httr-oauth
 .DS_Store
 .quarto
+using_trackdown.R
 
 /.quarto/

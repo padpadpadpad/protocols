@@ -3,10 +3,102 @@ title: How clean is the sea? Plating for _E. coli_
 description: Protocol for preparing and plating seawater samples for counting _E. coli_.
 author: Daniel Padfield
 date: "`r Sys.Date()`"
-date-modified: "`r format(Sys.time(), '%d %B %Y')`"
+date-modified: last-modified
 date-format: long
 execute: 
   eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+    standalone: true
+    embed-resources: true
+
+  pdf:
+    toc: true
+    toc-depth: 5
+    fontsize: 14pt
+    code-overflow: wrap
+    keep-tex: false
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+  
+  docx:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
 ---
 
-# Write about your protocol here.
+## Outline
+This protocol outlines the steps for concentrating E. coli from 50 mL water samples using centrifugation, followed by plating on selective media. It was created partly created using Google Gemini.
+Make sure you have had training on all the equipment and methods outlined. If you have any questions, ask somebody who can help.
+## Materials and Equipment
+* Water Samples: 50 mL water samples collected in sterile 50 mL Falcon tubes. 
+* Mega-Centrifuge: Capable of spinning 50 mL Falcon tubes.
+* Sterile Pipettes and Tips: Various volumes (e.g., 1 mL, 10 mL, 200 µL).
+* Serological pipette.
+* Petri Dishes: 90 mm diameter.
+* 96 well plates.
+* Sterile glass beads.
+* LB agar (for total bacterial count).
+* Selective/Differential Agar Media for E. coli:  
+   * Chromogenic Agar: Such as CHROMagar™ E. coli, m-ColiBlue21® Agar, or similar. These media typically produce distinctively colored colonies for E. coli (e.g., blue or purple).
+* Sterile Diluent: 0.85% NaCl solution. 
+* Incubator: Set to 37 ºC. 
+* Vortex.
+* Ethanol (70%) or other disinfectant.
+* Autoclave bag for waste disposal. 
+* Ethanol-resistant marker pen for labelling plates.
+* Plastic tub for liquid waste.
+ 
+## Method
+
+### Stage 1. Prepare and make plates
+
+1. Preparation:
+   1. Turn on a laminar flow hood
+   2. Ensure all equipment is clean and sterilised
+2. Pour LB plates and E. coli plates and leave to dry with lids off (~20 mins). An 800 mL bottle of molten agar should be able to pour around 40 plates.
+3. Store upside down, in their original plastic sleeve in the 4ºC cold room.
+4. Clean area and turn off laminar flow hood
+### Stage 2. Sample Concentration via Centrifugation 
+1. Preparation: 
+   1. Turn on a Cat II hood
+   2. Ensure all equipment is clean and sterilised.  
+   3. Get the required plates (that you have already poured) out of the cold room so they are ready to be used.
+2. Centrifugation: 
+   1. Balance the Mega-Centrifuge by placing tubes of equal volume and weight opposite each other. Use a balance tube filled with tap water if you have an odd number of samples. 
+   2. Centrifuge the samples at 5,000 x g for 15-20 minutes at 4ºC. This force and duration should pellet the bacterial cells.
+3. Supernatant Removal: 
+   1. Carefully remove the Falcon tubes from the centrifuge, disturbing the pellet as little as possible. 
+   2. Using a 50 mL serological pipette, remove the supernatant, leaving a small volume (e.g., 0.5 - 1 mL) containing the concentrated pellet at the bottom of the tube. Be very careful not to remove the pellet. A 1mL pipette can be used to more controllably remove more of the supernatant. Empty the supernatant into the liquid waste tub.
+   3. Alternative (if pellet is very distinct): Carefully decant the supernatant, leaving the pellet behind. This method carries a higher risk of losing some of the pellet.  
+4. Pellet resuspension: 
+   1. Add 5mL of sterile NaCl solution to the tube containing the pellet. 
+   2. Gently vortex the tube to thoroughly resuspend the pellet. This concentrated suspension now contains the E. coli from the original 50 mL sample. 
+## Stage 3: Plating and Incubation 
+1. Dilution (if necessary): 
+   1. Prepare serial dilutions of your resuspension.
+   2. Prepare a 96-well plate with 180 µL of NaCl solution in using a multichannel pipette.
+   3. Pipette 20 µL of your resuspended culture into the correct well of the first row
+   4. Mix the culture in the well (by pipetting up and down using a multichannel pipette 30x) then transfer 20µL to the next row (representing another ten fold dilution).
+   5. Dispense pipette tips into the waste jar.
+   6. With new pipette tips mix the culture in the next row and then transfer to the next row
+   7. Dispense of pipette tips
+   8. Repeat until you have gone to the correct number of dilutions
+2. Plate:
+   1. Label the plates on the agar side (not the lid) with the sample information and your team’s initials 
+   2. Place 6-10 glass beads onto the surface of each plate. 
+   3. Pipette 50µL of the suspension (or a dilution) onto one of the beads sat on the agar plate. 
+   4. Shake the plates for 30 seconds in a left to right and forwards and backwards motion to spread the beads over the plates. Do not shake the plates by moving the beads round in a circle 
+   5. Invert the inoculated Petri dishes (agar side up) to prevent condensation from dripping onto the agar surface. 
+3. Incubation: 
+   1. Incubate the plates in an incubator at 37ºC for 24 hours.
+   2. Check for growth after 24 hours, if the colonies are small, extend the incubation to 48 hours. 
+4. Count:
+   1. Count colonies on each plate.
+   2. Record the number of colonies, and the dilution of the plate that you are counting.

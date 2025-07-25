@@ -56,7 +56,7 @@ Next we can send upload a file from this repository - a .qmd file - to Google Dr
 
 ```{r}
 # upload a file to Google Drive
-trackdown::trackdown_upload(
+trackdown::upload_file(
   file = "protocol_input/ecoli_sampling.qmd"
 )
 ```
@@ -65,7 +65,7 @@ We can then edit the file as a group in Google Docs. Once we are happy, we can d
 
 ```{r}
 # download a file from Google Drive
-trackdown::trackdown_download(
+trackdown::download_file(
   file = "protocol_input/ecoli_sampling.qmd"
 )
 ```
