@@ -5,6 +5,8 @@ author: Daniel Padfield
 date: 07 07 2025
 date-modified: last-modified
 date-format: long
+categories:
+  - lab
 execute: 
   eval: false
 format:
