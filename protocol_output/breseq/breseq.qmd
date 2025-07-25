@@ -81,7 +81,7 @@ Firstly we install [**tmux**]() which allows us to run multiple terminal session
 
 We then create a new environment (which is a bit like a virtual machine) for all of the tools in the pipeline (actually just breseq and fastp). This is useful to avoid conflicts between different projects. You can learn more about conda environments [here](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
-```{r install}
+```{bash install}
 #| eval: false
 
 # install new mamba/conda installation if needed
@@ -107,7 +107,7 @@ conda create -n breseq_env -c bioconda breseq fastp seqkit
 
 ## Filter reads
 
-Next we need to do some additional filtering of the short reads. Sequencing services do some standard filtering, but we will do our own just to make sure.
+Next we need to do some additional filtering of the short reads. Sequencing services do some standard filtering and normally give you a folder of the raw files called **Trimmed**, but we will do our own just to ensure the quality of the reads in the pipeline.
 
 Our filtering removes:
 - Adapters
@@ -115,7 +115,7 @@ Our filtering removes:
 - Expected read length > 95% of expected read length (e.g. for 2x 150bp reads, this would be 143bp, for 2x 300bp reads, this would be 285bp)
 - We check the average read length of a single file using `seqkit stats` to see what the expected read length is.
 
-```{r filter}
+```{bash filter}
 #| eval: false
 
 # activate conda environment
@@ -149,7 +149,7 @@ done
 
 You can then look at the output in **fastp_reports**. Or run **seqkit stats** on the filtered files.
 
-```{r seqkit_stats}
+```{bash seqkit_stats}
 #| eval: false
 
 # run seqkit on filtered files
@@ -170,18 +170,19 @@ seqkit stats $wd/trimmed/*.fastq.gz
 
 ## Run breseq
 
-Now we can run **breseq**. The command runs a for loop through all of the different samples, and runs **breseq** against a reference. This command is written as a task which allows us to run it in parallel. An example of running it as a simple for loop in bash is also provided.
+Now we can run **breseq**. The command runs a for loop through all of the different samples, and runs **breseq** against a reference. This command is written as a task which allows us to run it in parallel. When **N=1**, it is run iteratively like a simple for loop, but when **N>1**, multiple instances of the task are run in parallel.
 
-This example is just mapping some reads back to the same reference genome, and is done on clonal sequencing data, so we are not expecting polymorphisms.
+This example maps reads from individual samples back to the same reference genome, and is done on clonal sequencing data, so we are not expecting polymorphisms.
 
 Things you will want to watch out for are:
 - If your reference genome is not a single contig, you might want to use the `--contig-reference` option.
 - If you have population level data, you will want to use the `-p` option to run in polymorphism mode.
 - This code assumes your forward and reverse reads are in the same folder, and their identifier is **1_trimmed.fastq.gz** and **2_trimmed.fastq.gz**. If this is not the case for your forward and reverse reads, you will need to change this!
 - **breseq** likes references in .gbk format.
-- **-j** is the number of threads. Set this to 8 or so if running on the RStudio server, might need to run it lower if on your local machine. 
+- **-j** is the number of threads. Set this to 8 or so if running on the RStudio server, might need to run it lower if on your local machine.
+- **breseq** by default does not provide annotation of variants in the VCF file, so we create those using **gdtools ANNOTATE** for each file. You can then use **R** code below to create a combined **csv** file with all the variants and their annotations.
 
-```{r run_breseq}
+```{bash run_breseq}
 #| eval: false
 
 # set working directory
@@ -213,15 +214,17 @@ task(){
 
         # run breseq - there are two contigs so run them in -c contig mode
         breseq $file_fwd $file_rev -j 4 -o  $stub -r $ref
+
+        # run gdtools to annotate the variants
+        gdtools ANNOTATE $stub/output/output.gd -r $ref -f CSV --output $stub/output/output.csv
 }
 
 # run one instance of this 
-# lets do 6
 N=1
 
 # try and run it on 6 instances at once
 (
-for file in $trimmed_files/*val_1.fq.gz; do 
+for file in $trimmed_files/*_1_trimmed.fastq.gz; do 
    ((i=i%N)); ((i++==0)) && wait
    task "$file" & 
 done
@@ -229,3 +232,58 @@ done
 
 ```
 
+This will create a folder called **breseq** in the working directory, and within that folder will be a folder for each sample containing intermediate and output files for that sample.
+
+You can then go into R and create a combined CSV file with all the variants and their annotations for each sample.
+
+```{r breseq_combine}
+#| eval: false
+
+# load in libraries
+librarian::shelf(tidyverse, vcfR)
+
+# list folders in the breseq output folder
+folders <- list.dirs("breseq", full.names = TRUE, recursive = FALSE)
+
+# for loop to create combined CSV file
+for (i in 1:length(folders)) {
+  temp_folder <- folders[i]
+
+  # read in the output CSV file
+  output_file <- file.path(temp_folder, "output", "output.csv") %>%
+    read.csv() %>%
+    select(
+      ref_seq,
+      new_seq,
+      type,
+      snp_type,
+      gene_product,
+      gene_position,
+      gene_name
+    )
+
+  # read in vcf file
+  vcf_file <- file.path(temp_folder, "output", "output.vcf") %>%
+    read.vcfR(
+      breseq_files[str_detect(breseq_files, ids[i])],
+      verbose = FALSE
+    ) %>%
+    vcfR2tidy(., info_only = TRUE) %>%
+    .$fix %>%
+    janitor::clean_names()
+
+  # combine and save out
+  bind_cols(d_vcf, d_gd) %>%
+    write.csv(
+      file = file.path(
+        temp_folder,
+        "output",
+        paste(base_name, "annotated_output.csv", sep = '_')
+      ),
+      row.names = FALSE
+    )
+}
+
+```
+
+This should result in a combined CSV file with all the variants and their annotations for each sample. They should be named by the folder/sample name **annotated_output.csv**. These can then be used in downstream analysis, although the other **breseq** output is also very useful.

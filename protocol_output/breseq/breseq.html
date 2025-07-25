@@ -2229,7 +2229,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 10, 2025</p>
+      <p class="date-modified">July 21, 2025</p>
     </div>
   </div>
     
@@ -2273,62 +2273,62 @@ vertical-align: -.125em;
 <p>Firstly we install <a href><strong>tmux</strong></a> which allows us to run multiple terminal sessions at once, and is particularly useful for running long-running commands. A cheatsheet for tmux is <a href="https://tmuxcheatsheet.com/">here</a>. The think I found most awkward was the <code>Ctrl-b</code>, then <code>d</code> for detach, but is easier when you realise <code>Ctrl-b</code> is the prefix action to all <strong>tmux</strong> commands.</p>
 <p>We then create a new environment (which is a bit like a virtual machine) for all of the tools in the pipeline (actually just breseq and fastp). This is useful to avoid conflicts between different projects. You can learn more about conda environments <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install new mamba/conda installation if needed</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>curl <span class="sc">-</span>L <span class="sc">-</span>O <span class="st">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh&quot;</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install new mamba/conda installation if needed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-O</span> <span class="st">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>bash Miniforge3<span class="sc">-</span><span class="er">$</span>(uname)<span class="sc">-</span><span class="er">$</span>(uname <span class="sc">-</span>m).sh</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniforge3-<span class="va">$(</span><span class="fu">uname</span><span class="va">)</span>-<span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span>.sh</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># update conda if needed</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>conda update conda</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update conda</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set up channel configuration based on current best practice</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>conda config <span class="sc">--</span>add channels bioconda</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>conda config <span class="sc">--</span>add channels conda<span class="sc">-</span>forge</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>conda config <span class="sc">--</span>set channel_priority strict</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># install tmux</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>conda install <span class="sc">-</span>c conda<span class="sc">-</span>forge tmux</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge tmux</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># create conda environment for breseq</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>conda create <span class="sc">-</span>n breseq_env <span class="sc">-</span>c bioconda breseq fastp seqkit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> breseq_env <span class="at">-c</span> bioconda breseq fastp seqkit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filter-reads" class="level2">
 <h2 class="anchored" data-anchor-id="filter-reads">Filter reads</h2>
-<p>Next we need to do some additional filtering of the short reads. Sequencing services do some standard filtering, but we will do our own just to make sure.</p>
+<p>Next we need to do some additional filtering of the short reads. Sequencing services do some standard filtering and normally give you a folder of the raw files called <strong>Trimmed</strong>, but we will do our own just to ensure the quality of the reads in the pipeline.</p>
 <p>Our filtering removes: - Adapters - Median Q score, all bases &gt; 30 - Expected read length &gt; 95% of expected read length (e.g. for 2x 150bp reads, this would be 143bp, for 2x 300bp reads, this would be 285bp) - We check the average read length of a single file using <code>seqkit stats</code> to see what the expected read length is.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># activate conda environment</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>conda activate breseq_env</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># activate conda environment</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate breseq_env</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory to where the short reads are</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>wd<span class="ot">=</span>short_reads</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">wd</span><span class="op">=</span>short_reads</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make fastp reports folder</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p <span class="st">&quot;$wd/fastp_reports&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">$wd</span><span class="st">/fastp_reports&quot;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># look at one file to look for read length</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>file<span class="ot">=</span><span class="er">$</span>wd<span class="sc">/</span><span class="dv">307504</span>_NalR2_1_trimmed.fastq.gz</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>seqkit stats <span class="sc">$</span>file</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">file</span><span class="op">=</span><span class="va">$wd</span>/307504_NalR2_1_trimmed.fastq.gz</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="va">$file</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastp on all the short reads</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> <span class="sc">$</span>wd<span class="sc">/</span><span class="er">*</span><span class="dv">1</span>_trimmed.fastq.gz; do</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="va">$wd</span>/<span class="pp">*</span>1_trimmed.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    fwd<span class="ot">=</span><span class="er">$</span>file</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="va">fwd</span><span class="op">=</span><span class="va">$file</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># replace 1_trimmed.fastq.gz with 2_trimmed.fastq.gz to get the reverse read</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    rev<span class="ot">=</span><span class="er">$</span>{fwd%<span class="dv">1</span>_trimmed.fastq.gz}<span class="dv">2</span>_trimmed.fastq.gz</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">rev</span><span class="op">=</span><span class="va">${fwd</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>2_trimmed.fastq.gz</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $fwd</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $rev</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run fastp on the file</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    fastp <span class="sc">-</span>i <span class="sc">$</span>fwd <span class="sc">-</span>I <span class="sc">$</span>rev <span class="sc">-</span>o  <span class="st">&quot;$wd/trimmed/$(basename $fwd)&quot;</span> <span class="sc">-</span>O <span class="st">&quot;$wd/trimmed/$(basename $rev)&quot;</span> <span class="sc">-</span>w <span class="dv">4</span> <span class="sc">--</span>detect_adapter_for_pe <span class="sc">-</span>l <span class="dv">237</span> <span class="sc">-</span>q <span class="dv">30</span> <span class="sc">-</span>j <span class="st">&quot;$wd/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.json)&quot;</span> <span class="sc">-</span>h <span class="st">&quot;$wd/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.html)&quot;</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastp</span> <span class="at">-i</span> <span class="va">$fwd</span> <span class="at">-I</span> <span class="va">$rev</span> <span class="at">-o</span>  <span class="st">&quot;</span><span class="va">$wd</span><span class="st">/trimmed/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$fwd)</span><span class="st">&quot;</span> <span class="at">-O</span> <span class="st">&quot;</span><span class="va">$wd</span><span class="st">/trimmed/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$rev)</span><span class="st">&quot;</span> <span class="at">-w</span> 4 <span class="at">--detect_adapter_for_pe</span> <span class="at">-l</span> 237 <span class="at">-q</span> 30 <span class="at">-j</span> <span class="st">&quot;</span><span class="va">$wd</span><span class="st">/fastp_reports/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${fwd</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>fastp.json<span class="va">)</span><span class="st">&quot;</span> <span class="at">-h</span> <span class="st">&quot;</span><span class="va">$wd</span><span class="st">/fastp_reports/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${fwd</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>fastp.html<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can then look at the output in <strong>fastp_reports</strong>. Or run <strong>seqkit stats</strong> on the filtered files.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run seqkit on filtered files</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>seqkit stats <span class="sc">$</span>wd<span class="sc">/</span>trimmed<span class="sc">/</span><span class="er">*</span>.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run seqkit on filtered files</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="va">$wd</span>/trimmed/<span class="pp">*</span>.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="caption-top table">
 <colgroup>
@@ -2439,53 +2439,104 @@ vertical-align: -.125em;
 </section>
 <section id="run-breseq" class="level2">
 <h2 class="anchored" data-anchor-id="run-breseq">Run breseq</h2>
-<p>Now we can run <strong>breseq</strong>. The command runs a for loop through all of the different samples, and runs <strong>breseq</strong> against a reference. This command is written as a task which allows us to run it in parallel. An example of running it as a simple for loop in bash is also provided.</p>
-<p>This example is just mapping some reads back to the same reference genome, and is done on clonal sequencing data, so we are not expecting polymorphisms.</p>
-<p>Things you will want to watch out for are: - If your reference genome is not a single contig, you might want to use the <code>--contig-reference</code> option. - If you have population level data, you will want to use the <code>-p</code> option to run in polymorphism mode. - This code assumes your forward and reverse reads are in the same folder, and their identifier is <strong>1_trimmed.fastq.gz</strong> and <strong>2_trimmed.fastq.gz</strong>. If this is not the case for your forward and reverse reads, you will need to change this! - <strong>breseq</strong> likes references in .gbk format. - <strong>-j</strong> is the number of threads. Set this to 8 or so if running on the RStudio server, might need to run it lower if on your local machine.</p>
+<p>Now we can run <strong>breseq</strong>. The command runs a for loop through all of the different samples, and runs <strong>breseq</strong> against a reference. This command is written as a task which allows us to run it in parallel. When <strong>N=1</strong>, it is run iteratively like a simple for loop, but when <strong>N&gt;1</strong>, multiple instances of the task are run in parallel.</p>
+<p>This example maps reads from individual samples back to the same reference genome, and is done on clonal sequencing data, so we are not expecting polymorphisms.</p>
+<p>Things you will want to watch out for are: - If your reference genome is not a single contig, you might want to use the <code>--contig-reference</code> option. - If you have population level data, you will want to use the <code>-p</code> option to run in polymorphism mode. - This code assumes your forward and reverse reads are in the same folder, and their identifier is <strong>1_trimmed.fastq.gz</strong> and <strong>2_trimmed.fastq.gz</strong>. If this is not the case for your forward and reverse reads, you will need to change this! - <strong>breseq</strong> likes references in .gbk format. - <strong>-j</strong> is the number of threads. Set this to 8 or so if running on the RStudio server, might need to run it lower if on your local machine. - <strong>breseq</strong> by default does not provide annotation of variants in the VCF file, so we create those using <strong>gdtools ANNOTATE</strong> for each file. You can then use <strong>R</strong> code below to create a combined <strong>csv</strong> file with all the variants and their annotations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>wd<span class="ot">=</span>BASEFOLDER_OF_CHOICE</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">wd</span><span class="op">=</span>BASEFOLDER_OF_CHOICE</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set reference genome</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ref<span class="ot">=</span><span class="er">$</span>wd<span class="sc">/</span>reference<span class="sc">/</span>reference.gbk</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">ref</span><span class="op">=</span><span class="va">$wd</span>/reference/reference.gbk</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set output folder</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>output_folder<span class="ot">=</span><span class="er">$</span>wd<span class="sc">/</span>breseq</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="va">output_folder</span><span class="op">=</span><span class="va">$wd</span>/breseq</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># make folder if it does not exist</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p <span class="sc">$</span>output_folder</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$output_folder</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># write up the breseq command in a task</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">task</span>(){</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">task()</span><span class="kw">{</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># assign fwd and rev files</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        file_fwd<span class="ot">=</span><span class="st">&quot;$1&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">file_fwd</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># assign fwd and rev files</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        file_fwd<span class="ot">=</span><span class="st">&quot;$1&quot;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        file_rev<span class="ot">=</span><span class="er">$</span>{file%_1_trimmed.fastq.gz}_2_trimmed.fastq.gz</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">file_fwd</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">file_rev</span><span class="op">=</span><span class="va">${file</span><span class="op">%</span>_1_trimmed.fastq.gz<span class="va">}</span>_2_trimmed.fastq.gz</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">#stub</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        stub<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%_1_trimmed.fastq.gz})</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">stub</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>_1_trimmed.fastq.gz<span class="va">})</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        echo <span class="sc">$</span>stub</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="va">$stub</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        mkdir <span class="sc">-</span>p <span class="sc">$</span>wd<span class="sc">/</span>breseq<span class="sc">/</span><span class="er">$</span>stub</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$wd</span>/breseq/<span class="va">$stub</span></span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run breseq - there are two contigs so run them in -c contig mode</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        breseq <span class="sc">$</span>file_fwd <span class="sc">$</span>file_rev <span class="sc">-</span>j <span class="dv">4</span> <span class="sc">-</span>o  <span class="sc">$</span>stub <span class="sc">-</span>r <span class="sc">$</span>ref</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># run one instance of this </span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># lets do 6</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># try and run it on 6 instances at once</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> <span class="sc">$</span>trimmed_files<span class="sc">/</span><span class="er">*</span>val_1.fq.gz; do </span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>   ((<span class="at">i=</span>i%N)); ((i<span class="sc">++</span><span class="er">==</span><span class="dv">0</span>)) <span class="sc">&amp;&amp;</span> wait</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>   task <span class="st">&quot;$file&quot;</span> <span class="sc">&amp;</span> </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>done</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="ex">breseq</span> <span class="va">$file_fwd</span> <span class="va">$file_rev</span> <span class="at">-j</span> 4 <span class="at">-o</span>  <span class="va">$stub</span> <span class="at">-r</span> <span class="va">$ref</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run gdtools to annotate the variants</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="ex">gdtools</span> ANNOTATE <span class="va">$stub</span>/output/output.gd <span class="at">-r</span> <span class="va">$ref</span> <span class="at">-f</span> CSV <span class="at">--output</span> <span class="va">$stub</span>/output/output.csv</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># run one instance of this </span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="va">N</span><span class="op">=</span>1</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co"># try and run it on 6 instances at once</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="va">$trimmed_files</span>/<span class="pp">*</span>_1_trimmed.fastq.gz<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>   <span class="kw">((</span><span class="va">i</span><span class="op">=</span><span class="va">i</span><span class="op">%</span><span class="va">N</span><span class="kw">));</span> <span class="kw">((</span><span class="va">i</span><span class="op">++==</span><span class="dv">0</span><span class="kw">))</span> <span class="kw">&amp;&amp;</span> <span class="bu">wait</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>   <span class="ex">task</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="kw">&amp;</span> </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>This will create a folder called <strong>breseq</strong> in the working directory, and within that folder will be a folder for each sample containing intermediate and output files for that sample.</p>
+<p>You can then go into R and create a combined CSV file with all the variants and their annotations for each sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load in libraries</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>librarian<span class="sc">::</span><span class="fu">shelf</span>(tidyverse, vcfR)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># list folders in the breseq output folder</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>folders <span class="ot">&lt;-</span> <span class="fu">list.dirs</span>(<span class="st">&quot;breseq&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">recursive =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># for loop to create combined CSV file</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(folders)) {</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  temp_folder <span class="ot">&lt;-</span> folders[i]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># read in the output CSV file</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  output_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(temp_folder, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;output.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      ref_seq,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      new_seq,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      type,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      snp_type,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      gene_product,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      gene_position,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      gene_name</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># read in vcf file</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  vcf_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(temp_folder, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;output.vcf&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.vcfR</span>(</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      breseq_files[<span class="fu">str_detect</span>(breseq_files, ids[i])],</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vcfR2tidy</span>(., <span class="at">info_only =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    .<span class="sc">$</span>fix <span class="sc">%&gt;%</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine and save out</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(d_vcf, d_gd) <span class="sc">%&gt;%</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.csv</span>(</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="fu">file.path</span>(</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        temp_folder,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;output&quot;</span>,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste</span>(base_name, <span class="st">&quot;annotated_output.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&#39;_&#39;</span>)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This should result in a combined CSV file with all the variants and their annotations for each sample. They should be named by the folder/sample name <strong>annotated_output.csv</strong>. These can then be used in downstream analysis, although the other <strong>breseq</strong> output is also very useful.</p>
 </section>
 </section>
 

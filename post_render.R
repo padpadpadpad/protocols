@@ -23,7 +23,7 @@ for (file in files) {
 
 # remove protocol_output/protocol_input
 dirs <- unlink('protocol_output/protocol_input', recursive = TRUE)
-
+dirs <- unlink('protocol_output/images', recursive = TRUE)
 
 # 2. move all files from protocol_input to their own directories in protocol_output
 
