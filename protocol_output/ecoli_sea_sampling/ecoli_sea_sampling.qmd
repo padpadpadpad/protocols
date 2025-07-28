@@ -50,7 +50,7 @@ The equipment will be provided by your supervisors.
  
 ## Method
 
-1. Label three 50 mL falcon tubes with your initials, the time and date, and the what3words location of where you are sampling. You can download the app for your Android or iPhone easily from here.
+1. Label three 50 mL falcon tubes with your initials, the time and date, and the what3words location of where you are sampling. You can download the app for your Android or iPhone easily from [here](https://what3words.com/products/what3words-app).
 2. Take a surface sample of seawater using the bucket from as far from the shoreline as practical and safe.
 3. Mix by swirling the contents of the bucket immediately and fill a 50 mL falcon tubes to the neck by immersing the tube in the bucket. Do not allow the contents of the bucket to settle before filling the bottle. Close the lid of the falcon tubes tightly.
 4. Empty the bucket back into the sea.
@@ -65,7 +65,7 @@ In addition to water sampling, the following data should be collected at the tim
 
 * Date and time of sampling
 * Name(s) of person(s) collecting the samples
-* What3words location (you can download the app)
+* What3words location (you can download the app here: https://what3words.com/products/what3words-app)
 * Next high tide (https://www.tidetimes.co.uk/falmouth-tide-times)
 * Next low tide (https://www.tidetimes.co.uk/falmouth-tide-times)
   

@@ -2184,9 +2184,11 @@ vertical-align: -.125em;
   <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
   <ul>
   <li><a href="#inspiration" id="toc-inspiration" class="nav-link" data-scroll-target="#inspiration">Inspiration</a></li>
+  <li><a href="#ai-use-statement" id="toc-ai-use-statement" class="nav-link" data-scroll-target="#ai-use-statement">AI use statement</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   <li><a href="#other-resources" id="toc-other-resources" class="nav-link" data-scroll-target="#other-resources">Other resources</a></li>
   <li><a href="#contribute" id="toc-contribute" class="nav-link" data-scroll-target="#contribute">Contribute</a></li>
+  <li><a href="#where-to-run-this-code" id="toc-where-to-run-this-code" class="nav-link" data-scroll-target="#where-to-run-this-code">Where to run this code</a></li>
   <li><a href="#overview-of-the-pipeline" id="toc-overview-of-the-pipeline" class="nav-link" data-scroll-target="#overview-of-the-pipeline">Overview of the pipeline</a></li>
   <li><a href="#installing-necessary-packages" id="toc-installing-necessary-packages" class="nav-link" data-scroll-target="#installing-necessary-packages">Installing necessary packages</a></li>
   <li><a href="#check-for-contamination" id="toc-check-for-contamination" class="nav-link" data-scroll-target="#check-for-contamination">Check for contamination</a></li>
@@ -2199,9 +2201,8 @@ vertical-align: -.125em;
   <li><a href="#finding-a-consensus-assembly" id="toc-finding-a-consensus-assembly" class="nav-link" data-scroll-target="#finding-a-consensus-assembly">Finding a consensus assembly</a></li>
   <li><a href="#reorient-assembly" id="toc-reorient-assembly" class="nav-link" data-scroll-target="#reorient-assembly">Reorient assembly</a></li>
   <li><a href="#polishing-the-assembly" id="toc-polishing-the-assembly" class="nav-link" data-scroll-target="#polishing-the-assembly">Polishing the assembly</a></li>
+  <li><a href="#check-for-errors" id="toc-check-for-errors" class="nav-link" data-scroll-target="#check-for-errors">Check for errors</a></li>
   <li><a href="#annotate-assembly" id="toc-annotate-assembly" class="nav-link" data-scroll-target="#annotate-assembly">Annotate assembly</a></li>
-  <li><a href="#check-quality" id="toc-check-quality" class="nav-link" data-scroll-target="#check-quality">Check quality</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="genome_assembly.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="genome_assembly.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
@@ -2239,7 +2240,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 10, 2025</p>
+      <p class="date-modified">July 28, 2025</p>
     </div>
   </div>
     
@@ -2252,7 +2253,7 @@ vertical-align: -.125em;
 
 <section id="outline" class="level1">
 <h1>Outline</h1>
-<p>This documents the steps used to assemble a high quality genome from long- and (optionally) short-read sequencing. Here, we describe the steps taken, provide links to the relevant packages, and code chunks that can be used in your own analysis. While somme sequencing services may provide you with a complete genome, there are several reasons why you might want to keep the raw reads and assemble the genome yourself:</p>
+<p>This documents the steps used to assemble a high quality genome from long- and (optionally) short-read sequencing. We describe the steps taken, provide links to the relevant packages, and code chunks that can be used in your own pipeline. While somme sequencing services may provide you with a complete genome, there are several reasons why you might want to keep the raw reads and assemble the genome yourself:</p>
 <ul>
 <li>It is fun to learn new things!</li>
 <li>Can result in a standardised pipeline across sequencing service providers.</li>
@@ -2261,24 +2262,33 @@ vertical-align: -.125em;
 </ul>
 <section id="inspiration" class="level2">
 <h2 class="anchored" data-anchor-id="inspiration">Inspiration</h2>
-<p>This pipeline relies heavily on other resources, primarily <a href="https://github.com/rrwick/Autocycler">Autocycler</a> by <a href="https://bsky.app/profile/rrwick.bsky.social">Ryan Wick</a>, and the <a href="https://www.atcc.org/resources/technical-documents/genome-portal-technical-document">methods</a> of the ATCC Genome Portal managed by <a href="https://bsky.app/profile/bioinformer.bsky.social">Jonathan Jacobs</a>. The code in the pipeline was written with input from GitHub Copilot.</p>
+<p>This pipeline relies heavily on other resources, primarily <a href="https://github.com/rrwick/Autocycler">Autocycler</a> by <a href="https://bsky.app/profile/rrwick.bsky.social">Ryan Wick</a>, and the <a href="https://www.atcc.org/resources/technical-documents/genome-portal-technical-document">methods</a> of the ATCC Genome Portal managed by <a href="https://bsky.app/profile/bioinformer.bsky.social">Jonathan Jacobs</a>.</p>
+</section>
+<section id="ai-use-statement" class="level2">
+<h2 class="anchored" data-anchor-id="ai-use-statement">AI use statement</h2>
+<p>The code in this pipeline was written with input from GitHub Copilot.</p>
 </section>
 <section id="contact" class="level2">
 <h2 class="anchored" data-anchor-id="contact">Contact</h2>
-<p>If you have any questions about this pipeline or how to implement any of it, please contact Dan Padfield at d.padfield@exeter.ac.uk.</p>
+<p>If you have any questions about this pipeline, please contact Dan Padfield at d.padfield@exeter.ac.uk.</p>
 </section>
 <section id="other-resources" class="level2">
 <h2 class="anchored" data-anchor-id="other-resources">Other resources</h2>
-<ul>
-<li>Example script demonstrating how to download necessary packages for some of the pipeline.</li>
-</ul>
 </section>
 <section id="contribute" class="level2">
 <h2 class="anchored" data-anchor-id="contribute">Contribute</h2>
-<p>Please contribute to this documentation! Fixing any typos or</p>
+<p>Please contribute to this documentation! Fixing any typos or:</p>
 <ul>
-<li>Turn this script into a bash scripts that can be ran on the server. Likely just the assembly steps, and maybe <strong>sourmash</strong> looking at contamination.</li>
+<li>Submit an example script demonstrating how to download necessary packages for some of the pipeline.</li>
+<li>Turn this script into a bash scripts that can be ran on the server.</li>
+<li>Add in a step using <strong>sourmash</strong> to look at contamination.</li>
 </ul>
+</section>
+<section id="where-to-run-this-code" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-run-this-code">Where to run this code</h2>
+<p>You likely have access to multiple computing resources, ranging from your own personal desktop computer, to cloud computers where you can interactively program and do not have queuing software (e.g. RStudio servers) to High Performance Computing (e.g. Athena, Carson, or ISCA).</p>
+<p>The steps up until <strong>manual checking of assemblies</strong> should be run on a server or HPC, as making many long-read assemblies can take a long time. Personally, I have been using the RStudio Servers, which run Linux. If you are running this on a Mac or Windows machine, you may need to adapt the code slightly. The code is run in the Terminal using bash, I SSH into the RStudio Server using <a href="https://positron.posit.co/">Positron</a>, the new IDE from Posit (formerly RStudio), that works much like VSCode.</p>
+<p>For the <strong>autocycler</strong> steps onwards, I used my personal Mac (Apple Macbook Pro M2 2022 24GB MEM). The step that took the longest was annotation using <strong>pgap</strong>. If you struggle to install <strong>pgap</strong> then get in touch and I can run it for you on my machine.</p>
 </section>
 <section id="overview-of-the-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="overview-of-the-pipeline">Overview of the pipeline</h2>
@@ -2289,35 +2299,34 @@ vertical-align: -.125em;
 <p>Firstly we install <a href><strong>tmux</strong></a> which allows us to run multiple terminal sessions at once, and is particularly useful for running long-running commands. A cheatsheet for tmux is <a href="https://tmuxcheatsheet.com/">here</a>. The think I found most awkward was the <code>Ctrl-b</code>, then <code>d</code> for detach, but is easier when you realise <code>Ctrl-b</code> is the prefix action to all <strong>tmux</strong> commands.</p>
 <p>We then create a new environment (which is a bit like a virtual machine) for all of the tools in the pipeline. This is useful to avoid conflicts between different projects. You can learn more about conda environments <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">here</a>.</p>
 <p><strong>If there are conflicts between any of the packages in your install, it might be useful for you to create different environments for some of the different packages. This can be done easily by copying the line of code and editing it, an example is shown below.</strong></p>
-<p>This is all currently run on the RStudio Servers, which run Linux. If you are running this on a Mac or Windows machine, you may need to adapt the code slightly. The code is run in the Terminal using bash, I SSH into the RStudio Server using <a href="https://positron.posit.co/">Positron</a>, the new IDE from Posit (formerly RStudio), that works much like VSCode.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install new mamba/conda installation if needed</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>curl <span class="sc">-</span>L <span class="sc">-</span>O <span class="st">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh&quot;</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install new mamba/conda installation if needed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-O</span> <span class="st">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="va">$(</span><span class="fu">uname</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">.sh&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>bash Miniforge3<span class="sc">-</span><span class="er">$</span>(uname)<span class="sc">-</span><span class="er">$</span>(uname <span class="sc">-</span>m).sh</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniforge3-<span class="va">$(</span><span class="fu">uname</span><span class="va">)</span>-<span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span>.sh</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># update conda if needed</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>conda update conda</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update conda</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set up channel configuration based on current best practice</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>conda config <span class="sc">--</span>add channels bioconda</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>conda config <span class="sc">--</span>add channels conda<span class="sc">-</span>forge</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>conda config <span class="sc">--</span>set channel_priority strict</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels bioconda</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># install tmux</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>conda install <span class="sc">-</span>c conda<span class="sc">-</span>forge tmux</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge tmux</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># install all the tools used in the pipeline - ADD OR REMOVE AS NEEDED</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>conda create <span class="sc">-</span>n autocycler <span class="sc">-</span>c conda<span class="sc">-</span>forge <span class="sc">-</span>c bioconda <span class="sc">-</span>c defaults autocycler canu flye metamdbg miniasm necat raven<span class="sc">-</span>assembler plassembler nextdenovo nextpolish fastp filtlong sourmash seqkit dnappler polypolish</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> autocycler <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-c</span> defaults autocycler canu flye metamdbg miniasm necat raven-assembler plassembler nextdenovo nextpolish fastp filtlong sourmash seqkit dnappler polypolish</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># we also need to install a database for plassembler and make it available to the conda environment</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>conda activate autocycler</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plassembler download <span class="sc">-</span>d <span class="sc">~</span><span class="er">/</span>databases<span class="sc">/</span>plassembler</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>conda env config vars set PLASSEMBLER_DB<span class="ot">=</span><span class="er">~/</span>databases<span class="sc">/</span>plassembler</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>conda deactivate</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate autocycler</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ex">plassembler</span> download <span class="at">-d</span> ~/databases/plassembler</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env config vars set PLASSEMBLER_DB=~/databases/plassembler</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># if you have a package that cannot be installed due to a conflict, you can create a new environment for that package</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>conda create <span class="sc">-</span>n medaka <span class="sc">-</span>c nanoporetech medaka</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> medaka <span class="at">-c</span> nanoporetech medaka</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-for-contamination" class="level2">
@@ -2341,25 +2350,25 @@ vertical-align: -.125em;
 <p>This section assumes you have a folder with your short reads in fastq.gz format. If you have paired-end reads (e.g. forward and reverse) you will need to know how they are named. In this example from MicrobesNG, the forward reads end in <strong>1_trimmed.fastq.gz</strong> and the reverse reads end in <strong>2_trimmed.fastq.gz</strong>. You can change this to match the naming of your files.</p>
 <p><strong>TIP. When running for loops in Terminal, I will often run a version to check the right filenames are being called before running the filtering step. To do this you can un-hashtag echo $fwd and echo $rev and hash the fastp command.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make directory for short trimmed short reads</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p short_reads<span class="sc">/</span>trimmed</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trimmed_short<span class="ot">=</span>short_reads<span class="sc">/</span>trimmed</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make directory for short trimmed short reads</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> short_reads/trimmed</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">trimmed_short</span><span class="op">=</span>short_reads/trimmed</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>conda activate autocycler</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate autocycler</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># run fastp on all the short reads</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> short_reads<span class="sc">/</span><span class="er">*</span><span class="dv">1</span>_trimmed.fastq.gz; do</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> short_reads/<span class="pp">*</span>1_trimmed.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    fwd<span class="ot">=</span><span class="er">$</span>file</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">fwd</span><span class="op">=</span><span class="va">$file</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># replace 1_trimmed.fastq.gz with 2_trimmed.fastq.gz to get the reverse read</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    rev<span class="ot">=</span><span class="er">$</span>{fwd%<span class="dv">1</span>_trimmed.fastq.gz}<span class="dv">2</span>_trimmed.fastq.gz</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">rev</span><span class="op">=</span><span class="va">${fwd</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>2_trimmed.fastq.gz</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $fwd</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#echo $rev</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run fastp on the file</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    fastp <span class="sc">-</span>i <span class="sc">$</span>fwd <span class="sc">-</span>I <span class="sc">$</span>rev <span class="sc">-</span>o  <span class="st">&quot;$trimmed_short/$(basename $fwd)&quot;</span> <span class="sc">-</span>O <span class="st">&quot;$trimmed_short/trimmed/$(basename $rev)&quot;</span> <span class="sc">-</span>w <span class="dv">4</span> <span class="sc">--</span>detect_adapter_for_pe <span class="sc">-</span>l <span class="dv">237</span> <span class="sc">-</span>q <span class="dv">30</span> <span class="sc">-</span>j <span class="st">&quot;$short_reads/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.json)&quot;</span> <span class="sc">-</span>h <span class="st">&quot;$short_reads/fastp_reports/$(basename ${fwd%1_trimmed.fastq.gz}fastp.html)&quot;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastp</span> <span class="at">-i</span> <span class="va">$fwd</span> <span class="at">-I</span> <span class="va">$rev</span> <span class="at">-o</span>  <span class="st">&quot;</span><span class="va">$trimmed_short</span><span class="st">/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$fwd)</span><span class="st">&quot;</span> <span class="at">-O</span> <span class="st">&quot;</span><span class="va">$trimmed_short</span><span class="st">/trimmed/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$rev)</span><span class="st">&quot;</span> <span class="at">-w</span> 4 <span class="at">--detect_adapter_for_pe</span> <span class="at">-l</span> 237 <span class="at">-q</span> 30 <span class="at">-j</span> <span class="st">&quot;</span><span class="va">$short_reads</span><span class="st">/fastp_reports/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${fwd</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>fastp.json<span class="va">)</span><span class="st">&quot;</span> <span class="at">-h</span> <span class="st">&quot;</span><span class="va">$short_reads</span><span class="st">/fastp_reports/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${fwd</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>fastp.html<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filtering-long-reads" class="level2">
@@ -2370,14 +2379,14 @@ vertical-align: -.125em;
 <li>Minimum mean read quality &gt; 10</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make directory</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p long_reads<span class="sc">/</span>trimmed</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make directory</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> long_reads/trimmed</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># run for loop</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> long_reads<span class="sc">/</span><span class="er">*</span>.fastq.gz; do</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> long_reads/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run filtlong on the file</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    filtlong <span class="sc">--</span>min_length <span class="dv">1000</span> <span class="sc">--</span>min_mean_q <span class="dv">10</span> <span class="st">&quot;$file&quot;</span> <span class="sc">|</span>gzip <span class="sc">&gt;</span> <span class="st">&quot;long_reads/trimmed/$(basename $file)&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">filtlong</span> <span class="at">--min_length</span> 1000 <span class="at">--min_mean_q</span> 10 <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="kw">|</span><span class="fu">gzip</span> <span class="op">&gt;</span> <span class="st">&quot;long_reads/trimmed/</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$file)</span><span class="st">&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="checking-estimated-coverage" class="level2">
@@ -2390,10 +2399,10 @@ vertical-align: -.125em;
 <p>Each subset is then used to generate a separate assembly. Creating diverse input assemblies increases the likelihood of capturing all sequences in the genome while reducing the risk of shared assembly errors.</p>
 <p>The below command takes all the files in <strong>long_reads/trimmed</strong> and creates a <strong>subsampled_reads</strong> directory which will contain the subsampled read files. Each file with have its own sub-folder within <strong>subsampled_reads</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset reads</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> long_reads<span class="sc">/</span>trimmed<span class="sc">/</span><span class="er">*</span>.fastq.gz; do</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    autocycler subsample <span class="sc">--</span>reads <span class="sc">$</span>file <span class="sc">--</span>out_dir long_reads<span class="sc">/</span>subsampled<span class="sc">/</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fastq.gz}) <span class="sc">--</span>genome_size <span class="fl">4.6</span>M</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset reads</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> long_reads/trimmed/<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">autocycler</span> subsample <span class="at">--reads</span> <span class="va">$file</span> <span class="at">--out_dir</span> long_reads/subsampled/<span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>.fastq.gz<span class="va">})</span> <span class="at">--genome_size</span> 4.6M</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creating-multiple-assemblies" class="level2">
@@ -2402,42 +2411,42 @@ vertical-align: -.125em;
 <p>This command will create an assembly using <strong>canu</strong>, <strong>flye</strong>, <strong>metamdbg</strong>, <strong>miniasm</strong>, <strong>necat</strong>, <strong>nextdenovo</strong>, and <strong>raven</strong>. <strong>canu</strong> takes the longest to run, but can often by very accurate.</p>
 <p>The following code runs autocycler on all of the subsampled long reads. It will create a folder called <strong>assemblies</strong> and put the assemblies in there. The assemblies will be named with the original long read file name, assembler name, and the sample name. This code could likely be sped up or parallelised, but for now it is run sequentially.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set threads to use for assembly</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>threads<span class="ot">=</span><span class="dv">15</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set threads to use for assembly</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">threads</span><span class="op">=</span>15</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># how many threads do we have</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nproc</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nproc</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>genome_size<span class="ot">=</span><span class="fl">4.6</span>M</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">genome_size</span><span class="op">=</span>4.6M</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>file<span class="ot">=</span><span class="st">&quot;long_reads/subsampled/307501E/sample_01.fastq&quot;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>filename<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fastq})</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="va">file</span><span class="op">=</span><span class="st">&quot;long_reads/subsampled/307501E/sample_01.fastq&quot;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>.fastq<span class="va">})</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> folder <span class="cf">in</span> long_reads<span class="sc">/</span>subsampled<span class="sc">/</span><span class="er">*</span>;do</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    foldername<span class="ot">=</span><span class="er">$</span>(basename <span class="st">&quot;$folder&quot;</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> long_reads/subsampled/<span class="pp">*</span><span class="kw">;</span><span class="cf">do</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">foldername</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span><span class="va">)</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> file <span class="cf">in</span> <span class="st">&quot;$folder&quot;</span><span class="sc">/</span><span class="er">*</span>.fastq; do</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        filename<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fastq})</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> file <span class="kw">in</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span>/<span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>.fastq<span class="va">})</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run each assembler</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> assembler <span class="cf">in</span> canu flye metamdbg miniasm necat nextdenovo raven; do</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            autocycler helper <span class="st">&quot;$assembler&quot;</span> <span class="sc">--</span>reads <span class="st">&quot;$file&quot;</span> <span class="sc">--</span>out_prefix assemblies<span class="sc">/</span><span class="st">&quot;$foldername&quot;</span>_<span class="st">&quot;$assembler&quot;</span>_<span class="st">&quot;$filename&quot;</span> <span class="sc">--</span>threads <span class="st">&quot;$threads&quot;</span> <span class="sc">--</span>genome_size <span class="st">&quot;$genome_size&quot;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            conda deactivate</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        done</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    done</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> assembler <span class="kw">in</span> canu flye metamdbg miniasm necat nextdenovo raven<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="ex">autocycler</span> helper <span class="st">&quot;</span><span class="va">$assembler</span><span class="st">&quot;</span> <span class="at">--reads</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="at">--out_prefix</span> assemblies/<span class="st">&quot;</span><span class="va">$foldername</span><span class="st">&quot;</span>_<span class="st">&quot;</span><span class="va">$assembler</span><span class="st">&quot;</span>_<span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span> <span class="at">--threads</span> <span class="st">&quot;</span><span class="va">$threads</span><span class="st">&quot;</span> <span class="at">--genome_size</span> <span class="st">&quot;</span><span class="va">$genome_size</span><span class="st">&quot;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="ex">conda</span> deactivate</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you think you might have plasmids, you can also run <strong>plassembler</strong> to assemble plasmids. Assemblies made by <strong>plassembler</strong> will only include plasmids.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> folder <span class="cf">in</span> long_reads<span class="sc">/</span>subsampled<span class="sc">/</span><span class="er">*</span>;do</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    foldername<span class="ot">=</span><span class="er">$</span>(basename <span class="st">&quot;$folder&quot;</span>)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> folder <span class="kw">in</span> long_reads/subsampled/<span class="pp">*</span><span class="kw">;</span><span class="cf">do</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">foldername</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span><span class="va">)</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> file <span class="cf">in</span> <span class="st">&quot;$folder&quot;</span><span class="sc">/</span><span class="er">*</span>.fastq; do</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        filename<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fastq})</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> file <span class="kw">in</span> <span class="st">&quot;</span><span class="va">$folder</span><span class="st">&quot;</span>/<span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>.fastq<span class="va">})</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># run plassembler</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        autocycler helper plassembler <span class="sc">--</span>reads <span class="st">&quot;$file&quot;</span> <span class="sc">--</span>out_prefix assemblies<span class="sc">/</span><span class="st">&quot;$foldername&quot;</span>_plassembler_<span class="st">&quot;$filename&quot;</span> <span class="sc">--</span>threads <span class="st">&quot;$threads&quot;</span> <span class="sc">--</span>genome_size <span class="st">&quot;$genome_size&quot;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    done</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">autocycler</span> helper plassembler <span class="at">--reads</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="at">--out_prefix</span> assemblies/<span class="st">&quot;</span><span class="va">$foldername</span><span class="st">&quot;</span>_plassembler_<span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span> <span class="at">--threads</span> <span class="st">&quot;</span><span class="va">$threads</span><span class="st">&quot;</span> <span class="at">--genome_size</span> <span class="st">&quot;</span><span class="va">$genome_size</span><span class="st">&quot;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="manual-checking-of-assemblies" class="level2">
@@ -2576,25 +2585,25 @@ vertical-align: -.125em;
 </table>
 <p>To filter fasta files, you can use <a href="https://bioinf.shenwei.me/seqkit/"><strong>seqkit</strong></a>. The following code will filter the assemblies based on the expected genome size. It will create a new folder called <strong>filtered_assemblies</strong> and put the filtered assemblies in there. It will keep all sequences that are greater than 80% of the expected genome size. If the filtered assembly is empty, it will be removed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make directory for filtered assemblies</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p assemblies<span class="sc">/</span>filtered_assemblies</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make directory for filtered assemblies</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> assemblies/filtered_assemblies</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate 80% of the expected genome size</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>to_cut<span class="ot">=</span><span class="er">$</span>(echo <span class="st">&quot;$genome_size * 0.8 * 1000000&quot;</span> <span class="sc">|</span> bc <span class="sc">|</span> cut <span class="sc">-</span>d<span class="st">&#39;.&#39;</span> <span class="sc">-</span>f1)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="va">to_cut</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$genome_size</span><span class="st"> * 0.8 * 1000000&quot;</span> <span class="kw">|</span> <span class="fu">bc</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;.&#39;</span> <span class="at">-f1</span><span class="va">)</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># run for loop to filter assemblies</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> assemblies<span class="sc">/</span><span class="er">*</span>.fasta; do</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> assemblies/<span class="pp">*</span>.fasta<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the filename without the extension</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    filename<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fasta})</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>.fasta<span class="va">})</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter the fasta file based on expected genome size</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    seqkit seq <span class="sc">-</span>g <span class="sc">-</span>m <span class="st">&quot;$to_cut&quot;</span> <span class="st">&quot;$file&quot;</span> <span class="sc">&gt;</span> <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered.fasta&quot;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">seqkit</span> seq <span class="at">-g</span> <span class="at">-m</span> <span class="st">&quot;</span><span class="va">$to_cut</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;assemblies/filtered_assemblies/</span><span class="va">${filename}</span><span class="st">_filtered.fasta&quot;</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if the filtered file is empty, remove it</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> [ <span class="sc">!</span> <span class="sc">-</span>s <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered.fasta&quot;</span> ]; then</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        rm <span class="sc">-</span>f <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered.fasta&quot;</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    fi</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-s</span> <span class="st">&quot;assemblies/filtered_assemblies/</span><span class="va">${filename}</span><span class="st">_filtered.fasta&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rm</span> <span class="at">-f</span> <span class="st">&quot;assemblies/filtered_assemblies/</span><span class="va">${filename}</span><span class="st">_filtered.fasta&quot;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After filtering, we can re run the R code to check the sequences in the filtered assemblies.</p>
 <div class="cell">
@@ -2689,21 +2698,21 @@ vertical-align: -.125em;
 <p>From this filtering process, you may lose some samples that do not pass this QC, but this is fine as long as you still have several assemblies to work with.</p>
 <p>If you expect plasmids, you may want to adjust these criteria. In our case we have plasmids of interest (R1 and RP4) that are between 50,000 and 100,000 bp in length. We can filter the assemblies to keep only those that are within this range. This can be done using <strong>seqkit</strong> again, but this time we will use the <code>-m</code> and <code>-M</code> options to specify the minimum and maximum length of the sequences to keep.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># our plasmids are between 50000 and 100000bp</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># our plasmids are between 50000 and 100000bp</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># run for loop to filter assemblies</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="cf">in</span> assemblies<span class="sc">/</span><span class="er">*</span>.fasta; do</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> assemblies/<span class="pp">*</span>.fasta<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the filename without the extension</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    filename<span class="ot">=</span><span class="er">$</span>(basename <span class="sc">$</span>{file%.fasta})</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">filename</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${file</span><span class="op">%</span>.fasta<span class="va">})</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter the fasta file based on expected genome size</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    seqkit seq <span class="sc">-</span>g <span class="sc">-</span>m <span class="dv">50000</span> <span class="sc">-</span>M <span class="dv">110000</span> <span class="st">&quot;$file&quot;</span> <span class="sc">&gt;</span> <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered.fasta&quot;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">seqkit</span> seq <span class="at">-g</span> <span class="at">-m</span> 50000 <span class="at">-M</span> 110000 <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;assemblies/filtered_assemblies/</span><span class="va">${filename}</span><span class="st">_filtered.fasta&quot;</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if the filtered file is empty, remove it</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> [ <span class="sc">!</span> <span class="sc">-</span>s <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered_plasmid.fasta&quot;</span> ]; then</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        rm <span class="sc">-</span>f <span class="st">&quot;assemblies/filtered_assemblies/${filename}_filtered_plasmid.fasta&quot;</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    fi</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-s</span> <span class="st">&quot;assemblies/filtered_assemblies/</span><span class="va">${filename}</span><span class="st">_filtered_plasmid.fasta&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rm</span> <span class="at">-f</span> <span class="st">&quot;assemblies/filtered_assemblies/</span><span class="va">${filename}</span><span class="st">_filtered_plasmid.fasta&quot;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We are now ready to proceed to the next steps of the pipeline, actually using the <strong>autocycler</strong> commands. At this stage you may want to manually separate your assemblies into individual folders. This should all be much less computationally intensive than the previous steps, so you can probably easily run these on your local machine.</p>
 </section>
@@ -2712,13 +2721,13 @@ vertical-align: -.125em;
 <p>We follow the steps as documented by <a href="https://www.biorxiv.org/content/10.1101/2025.05.12.653612v1"><strong>Autocycler</strong></a>. The <a href="https://github.com/rrwick/Autocycler/wiki">Wiki pages</a> are extremely useful and I am mainly summarising content from there. They contain lots of FAQs and troubleshooting tips if you come into trouble.</p>
 <p>First<a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-compress"><strong>autocycler compress</strong></a> uses the input assemblies to build a compacted De Bruijn graph (a.k.a. a unitig graph). This command takes an input directory named <strong>filtered/assemblies</strong> which contains the input assemblies in FASTA format. It will create the <strong>debruijn</strong> directory which will contain the graph as file named <strong>input_assemblies.gfa</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler compress to create a de bruijn graph of all the assemblies</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>autocycler compress <span class="sc">-</span>i assemblies<span class="sc">/</span>filtered_assemblies <span class="sc">-</span>a assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler compress to create a de bruijn graph of all the assemblies</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">autocycler</span> compress <span class="at">-i</span> assemblies/filtered_assemblies <span class="at">-a</span> assemblies/filtered_assemblies/debruijn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, <a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-cluster"><strong>autocycle cluster</strong></a> groups input contigs into clusters. A cluster is a group of contigs which represent the same genomic sequence. It also decides which of these clusters should be included in the final assembly (QC-pass) and which should not (QC-fail). This command takes a directory created by <strong>autocycler compress</strong> (named <strong>debruijn</strong> in the example) which must contain an <strong>input_assemblies.gfa</strong> file. It will create a subdirectory named <strong>clustering</strong> which in turn contains a <strong>qc_pass</strong> directory for the good clusters and a <strong>qc_fail</strong> directory for the bad clusters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler cluster to see which bits of the assembly should be included in the final assembly</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>autocycler cluster <span class="sc">-</span>a assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler cluster to see which bits of the assembly should be included in the final assembly</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">autocycler</span> cluster <span class="at">-a</span> assemblies/filtered_assemblies/debruijn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-trim"><strong>autocycler trim</strong></a> then trims excess sequences that can be present in long read contigs. This command goes through each cluster and trims each contig looking for hairpin and start-end circular overlaps. At the end of this step, remaining contigs in each cluster are in close agreement to each other.</p>
 <div class="cell">
@@ -2729,10 +2738,10 @@ vertical-align: -.125em;
 </div>
 <p><a href="https://github.com/rrwick/Autocycler/wiki/Autocycler-resolve"><strong>autocyler resolve</strong></a> aims to resolve repeats and ambiguities in each cluster. By the end of it, hopefully there is a single consentig for each cluster. This command runs through each cluster in <strong>qc_pass</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler resolve to resolve repeats and ambiguities in each cluster</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="cf">in</span> assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>debruijn<span class="sc">/</span>clustering<span class="sc">/</span>qc_pass<span class="sc">/</span>cluster_<span class="sc">*</span>; do</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    autocycler resolve <span class="sc">-</span>c <span class="st">&quot;$c&quot;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>done</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run autocycler resolve to resolve repeats and ambiguities in each cluster</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> assemblies/filtered_assemblies/debruijn/clustering/qc_pass/cluster_<span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">autocycler</span> resolve <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$c</span><span class="st">&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, the resolved sequences for each cluster are combined into a single assembly. This command takes an autocycler directory (<strong>debuijn</strong> in this example) and one or more cluster graphs (typically <strong>5_final.gfa</strong>) and creates <strong>consensus_assembly.fasta</strong> and <strong>consensus_assembly.gfa</strong> files in the <strong>debuijn</strong> directory.</p>
 <div class="cell">
@@ -2741,7 +2750,7 @@ vertical-align: -.125em;
 </div>
 <p>If this has worked, you will hopefully receive the message.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Consensus assembly is fully resolved 😄</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Consensus</span> assembly is fully resolved 😄</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can check the output of <strong>autocycler combine</strong> by looking at the <strong>consensus_assembly.gfa</strong> in Bandage. You can also look at the <strong>consensus_assembly.yaml</strong> file which contains the following information:</p>
 <ul>
@@ -2763,10 +2772,10 @@ vertical-align: -.125em;
 <p>The command <strong>dnaapler all</strong> works for prokaryote genomes, and <strong>dnaapler plasmid</strong> for plasmids. All of the options are the same and it is important to use the <strong>.gfa</strong>. The example code runs <strong>dnaapler all</strong> on the consensus assembly created by autocycler, and creates an output file called <strong>reoriented.gfa</strong>.</p>
 <p>It then uses <strong>autocycler gfa2fasta</strong> to convert the reoriented GFA file to a FASTA file. This is required for downstream steps like polishing and annotation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run dnaapler to reorient the assembly</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dnaapler all <span class="sc">-</span>i assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>consensus_assembly.gfa  <span class="sc">-</span>o assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>dnaapler <span class="sc">-</span>t <span class="dv">8</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run dnaapler to reorient the assembly</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dnaapler</span> all <span class="at">-i</span> assemblies/filtered_assemblies/ecoli/debruijn/consensus_assembly.gfa  <span class="at">-o</span> assemblies/filtered_assemblies/ecoli/debruijn/dnaapler <span class="at">-t</span> 8</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>autocycler gfa2fasta <span class="sc">-</span>i assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>dnaapler<span class="sc">/</span>reoriented.gfa <span class="sc">-</span>o assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>dnaapler<span class="sc">/</span>reoriented.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">autocycler</span> gfa2fasta <span class="at">-i</span> assemblies/filtered_assemblies/ecoli/debruijn/dnaapler/reoriented.gfa <span class="at">-o</span> assemblies/filtered_assemblies/ecoli/debruijn/dnaapler/reoriented.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="polishing-the-assembly" class="level2">
@@ -2775,50 +2784,72 @@ vertical-align: -.125em;
 <p>If you are assembling Oxford Nanopore reads, performing long-read polishing with <a href="https://github.com/nanoporetech/medaka">Medaka</a> can help. For PacBio reads you could use <a href="https://github.com/isovic/racon">Racon</a></p>
 <p>If you also have short reads, there are many tools. Ryan Wick recommends Polypolish and Pypolca, both of which are conservative (unlikely to introduce new errors).</p>
 <p>A paper benchmarking different polishing tools can be found <a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-024-10582-x#Sec41">here</a>.</p>
+<p><em>If you have a plasmid assembly here that you have isolated from your wider bacterial genome, you may want to remove the reads that map to your host bacteria. To do this you can use minimap which has code for doing this for both long and short reads. We shall not cover that here, but example code is below. Both commands take the trimmed long or short reads and map them to the bacteria assembly you have already created (Make sure to create that first!). It then returns the unmapped reads in fastq format which can then be passed onto medaka and Polypolish to polish the assembly.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NEED TO MAKE SURE MINIMAP AND SAMTOOLS ARE INSTALLED IN YOUR ENVIRONMENT</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run minimap2 to only keep reads NOT mapped to the bacteria assembly</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># remove bacteria from Nanopore long reads</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span> <span class="at">-ax</span> map-ont <span class="va">$bacteria_assembly</span> <span class="va">$long_reads</span> <span class="kw">|</span> <span class="ex">samtools</span> fastq <span class="at">-n</span> <span class="at">-f</span> 4 <span class="at">-</span> <span class="op">&gt;</span> <span class="va">${long_reads</span><span class="op">%</span>fastq.gz<span class="va">}</span>_plasmid.fastq</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># remove bacteria from short reads</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span> <span class="at">-ax</span> sr <span class="va">$bacteria_assembly</span> <span class="va">$short_reads</span> <span class="va">${short_reads</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>2_trimmed.fastq.gz <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-n</span> <span class="kw">|</span> <span class="ex">samtools</span> fastq <span class="at">-f</span> 4 <span class="at">-s</span> <span class="va">${short_reads</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>unmapped.fastq <span class="at">-1</span> <span class="va">${short_reads</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>plasmid_1.fastq <span class="at">-2</span> <span class="va">${short_reads</span><span class="op">%</span>1_trimmed.fastq.gz<span class="va">}</span>plasmid_2.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This command runs <strong>medaka</strong> and then <strong>Polypolish</strong> on the reoriented assembly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if you have issues installing medaka into the autocycler environment, you can install it into a separate environment</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a folder to place the polished the assemblies</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">-</span>p assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>polished</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># set up arguments needed for medaka</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>long_reads<span class="ot">=</span>strain_data<span class="sc">/</span>sequencing<span class="sc">/</span>hybrid_sequencing<span class="sc">/</span>long_reads<span class="sc">/</span>trimmed<span class="sc">/</span><span class="dv">307501</span>E.fastq.gz</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>assembly<span class="ot">=</span>assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>dnaapler<span class="sc">/</span>reoriented.fasta</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>outdir<span class="ot">=</span>assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>polished</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># run medaka</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>medaka_consensus <span class="sc">-</span>i <span class="sc">$</span>{long_reads} <span class="sc">-</span>d <span class="sc">$</span>{assembly} <span class="sc">-</span>o <span class="sc">$</span>{outdir} <span class="sc">-</span>t <span class="dv">4</span> <span class="sc">--</span>bacteria</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># move environments as needed</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>conda deactivate</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>conda activate autocycler</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co"># run polypolish</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>assembly<span class="ot">=</span>consensus.fasta</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>short_read_fwd<span class="ot">=</span><span class="er">/</span>Users<span class="sc">/</span>dp415<span class="sc">/</span>google_drive<span class="sc">/</span>work_googledrive<span class="sc">/</span>zoltan<span class="sc">/</span>strain_data<span class="sc">/</span>sequencing<span class="sc">/</span>hybrid_sequencing<span class="sc">/</span>short_reads<span class="sc">/</span>trimmed<span class="sc">/</span><span class="dv">307501</span>E_WT_1_trimmed.fastq.gz</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>short_read_rev<span class="ot">=</span><span class="st">&#39;/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_2_trimmed.fastq.gz&#39;</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>cd assemblies<span class="sc">/</span>filtered_assemblies<span class="sc">/</span>ecoli<span class="sc">/</span>debruijn<span class="sc">/</span>polished</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>bwa index consensus.fasta</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>bwa mem <span class="sc">-</span>t <span class="dv">16</span> <span class="sc">-</span>a consensus.fasta <span class="sc">$</span>short_read_fwd <span class="sc">&gt;</span> alignments_1.sam</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>bwa mem <span class="sc">-</span>t <span class="dv">16</span> <span class="sc">-</span>a consensus.fasta <span class="sc">$</span>short_read_rev <span class="sc">&gt;</span> alignments_2.sam</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>polypolish filter <span class="sc">--</span>in1 alignments_1.sam <span class="sc">--</span>in2 alignments_2.sam <span class="sc">--</span>out1 filtered_1.sam <span class="sc">--</span>out2 filtered_2.sam</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>polypolish polish <span class="sc">--</span>careful consensus.fasta filtered_1.sam filtered_2.sam <span class="sc">&gt;</span> polished.fasta</span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>rm <span class="sc">*</span>.amb <span class="sc">*</span>.ann <span class="sc">*</span>.bwt <span class="sc">*</span>.pac <span class="sc">*</span>.sa <span class="sc">*</span>.sam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if you have issues installing medaka into the autocycler environment, you can install it into a separate environment</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a folder to place the polished the assemblies</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> assemblies/filtered_assemblies/ecoli/debruijn/polished</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># set up arguments needed for medaka</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="va">long_reads</span><span class="op">=</span>strain_data/sequencing/hybrid_sequencing/long_reads/trimmed/307501E.fastq.gz</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="va">assembly</span><span class="op">=</span>assemblies/filtered_assemblies/ecoli/debruijn/dnaapler/reoriented.fasta</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="va">outdir</span><span class="op">=</span>assemblies/filtered_assemblies/ecoli/debruijn/polished</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># run medaka</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="ex">medaka_consensus</span> <span class="at">-i</span> <span class="va">${long_reads}</span> <span class="at">-d</span> <span class="va">${assembly}</span> <span class="at">-o</span> <span class="va">${outdir}</span> <span class="at">-t</span> 4 <span class="at">--bacteria</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># move environments as needed</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate autocycler</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># run polypolish</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="va">assembly</span><span class="op">=</span>consensus.fasta</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="va">short_read_fwd</span><span class="op">=</span>/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_1_trimmed.fastq.gz</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="va">short_read_rev</span><span class="op">=</span><span class="st">&#39;/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_2_trimmed.fastq.gz&#39;</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> assemblies/filtered_assemblies/ecoli/debruijn/polished</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index consensus.fasta</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-t</span> 16 <span class="at">-a</span> consensus.fasta <span class="va">$short_read_fwd</span> <span class="op">&gt;</span> alignments_1.sam</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="at">-t</span> 16 <span class="at">-a</span> consensus.fasta <span class="va">$short_read_rev</span> <span class="op">&gt;</span> alignments_2.sam</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="ex">polypolish</span> filter <span class="at">--in1</span> alignments_1.sam <span class="at">--in2</span> alignments_2.sam <span class="at">--out1</span> filtered_1.sam <span class="at">--out2</span> filtered_2.sam</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="ex">polypolish</span> polish <span class="at">--careful</span> consensus.fasta filtered_1.sam filtered_2.sam <span class="op">&gt;</span> polished.fasta</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="pp">*</span>.amb <span class="pp">*</span>.ann <span class="pp">*</span>.bwt <span class="pp">*</span>.pac <span class="pp">*</span>.sa <span class="pp">*</span>.sam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-for-errors" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-errors">Check for errors</h2>
+<p>We should now have a complete, high quality, polished assembly. However, errors can still exist. To look for these, we can use <a href="https://github.com/barricklab/breseq"><strong>breseq</strong></a> which is a tool for detecting mutations in bacterial genomes. By using the short reads we used for the polishing, we can check for any errors in the assembly. You can view any predictied “mutations” by looking at <strong>output/summary.html</strong> and clicking on the <strong>mutations predictions</strong> tab. In our case, this would represent errors in the assembly. If these exist, you can correct them by editing the <strong>.gd</strong> file. A walkthrough for doing this can be found on the <a href="https://github.com/barricklab/breseq/wiki/Tutorial-Clones"><strong>breseq</strong> wiki</a>.</p>
+<p>This command runs <strong>breseq</strong> on the polished assembly. It assume you are still within the directory where <strong>polished.fasta</strong> exists.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run breseq to check for errors in the assembly</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">breseq</span> <span class="at">-l</span> 80 <span class="at">-j</span> 8 <span class="at">-o</span> breseq <span class="at">-r</span> polished.fasta <span class="va">$short_read_fwd</span> <span class="va">$short_read_rev</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="annotate-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="annotate-assembly">Annotate assembly</h2>
-</section>
-<section id="check-quality" class="level2">
-<h2 class="anchored" data-anchor-id="check-quality">Check quality</h2>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<p>You can annotate the assembly using <a href="https://github.com/tseemann/prokka"><strong>prokka</strong></a> easily and quickly, but best practice now seems to be using the <a href="https://github.com/ncbi/pgap?tab=readme-ov-file"><strong>pgap</strong></a> pipeline (NCBI Prokaryotic Genome Annotation Pipeline). All genomes submitted to NCBI get annotated this way! This pipeline is a bit more comprehensive than <strong>prokka</strong>, and includes a completeness check using <a href="https://pubmed.ncbi.nlm.nih.gov/25977477/"><strong>CheckM</strong></a> and can confirm the correct organism is associated with the genome prior to annotation.</p>
+<p>This pipeline runs in a docker container. As such, I have not had much joy installing this on RStudio server as you cannot install Docker, but it is installable for Mac if you download the Docker desktop app, and as we only run it once per genome, I take this as an acceptable compromise. When it installs, it takes a long time to download all the necessary databases.</p>
+<p>This command assumes you have installed <strong>pgap</strong> using the commands on their GitHub. You will want to change directory to where you installed <strong>pgap</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change directory to where you installed pgap</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/where/you/installed/pgap</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># run pgap</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./pgap.py</span> <span class="at">-r</span> <span class="at">-o</span> ~/ecoli/pgap <span class="at">-g</span> ~/ecoli/polished.fasta <span class="at">-s</span> <span class="st">&#39;Escherichia coli&#39;</span> <span class="at">--taxcheck</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 

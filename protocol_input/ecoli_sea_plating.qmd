@@ -2,7 +2,7 @@
 title: How clean is the sea? Plating for _E. coli_
 description: Protocol for preparing and plating seawater samples for counting _E. coli_.
 author: Daniel Padfield
-date: "`r Sys.Date()`"
+date: 07 07 2025
 date-modified: last-modified
 date-format: long
 categories:
@@ -36,9 +36,13 @@ format:
 ---
 
 ## Outline
-This protocol outlines the steps for concentrating E. coli from 50 mL water samples using centrifugation, followed by plating on selective media. It was created partly created using Google Gemini.
+
+This protocol outlines the steps for concentrating _E. coli_ from 50 mL water samples using centrifugation, followed by plating on selective media. It was created partly created using Google Gemini.
+
 Make sure you have had training on all the equipment and methods outlined. If you have any questions, ask somebody who can help.
+
 ## Materials and Equipment
+
 * Water Samples: 50 mL water samples collected in sterile 50 mL Falcon tubes. 
 * Mega-Centrifuge: Capable of spinning 50 mL Falcon tubes.
 * Sterile Pipettes and Tips: Various volumes (e.g., 1 mL, 10 mL, 200 µL).
@@ -67,7 +71,9 @@ Make sure you have had training on all the equipment and methods outlined. If yo
 2. Pour LB plates and E. coli plates and leave to dry with lids off (~20 mins). An 800 mL bottle of molten agar should be able to pour around 40 plates.
 3. Store upside down, in their original plastic sleeve in the 4ºC cold room.
 4. Clean area and turn off laminar flow hood
+
 ### Stage 2. Sample Concentration via Centrifugation 
+
 1. Preparation: 
    1. Turn on a Cat II hood
    2. Ensure all equipment is clean and sterilised.  
@@ -82,7 +88,9 @@ Make sure you have had training on all the equipment and methods outlined. If yo
 4. Pellet resuspension: 
    1. Add 5mL of sterile NaCl solution to the tube containing the pellet. 
    2. Gently vortex the tube to thoroughly resuspend the pellet. This concentrated suspension now contains the E. coli from the original 50 mL sample. 
-## Stage 3: Plating and Incubation 
+
+### Stage 3: Plating and Incubation 
+
 1. Dilution (if necessary): 
    1. Prepare serial dilutions of your resuspension.
    2. Prepare a 96-well plate with 180 µL of NaCl solution in using a multichannel pipette.

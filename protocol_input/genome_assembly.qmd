@@ -35,7 +35,7 @@ format:
 
 # Outline
 
-This documents the steps used to assemble a high quality genome from long- and (optionally) short-read sequencing. Here, we describe the steps taken, provide links to the relevant packages, and code chunks that can be used in your own analysis. While somme sequencing services may provide you with a complete genome, there are several reasons why you might want to keep the raw reads and assemble the genome yourself:
+This documents the steps used to assemble a high quality genome from long- and (optionally) short-read sequencing. We describe the steps taken, provide links to the relevant packages, and code chunks that can be used in your own pipeline. While somme sequencing services may provide you with a complete genome, there are several reasons why you might want to keep the raw reads and assemble the genome yourself:
 
 -   It is fun to learn new things!
 -   Can result in a standardised pipeline across sequencing service providers.
@@ -44,21 +44,35 @@ This documents the steps used to assemble a high quality genome from long- and (
 
 ## Inspiration
 
-This pipeline relies heavily on other resources, primarily [Autocycler](https://github.com/rrwick/Autocycler) by [Ryan Wick](https://bsky.app/profile/rrwick.bsky.social), and the [methods](https://www.atcc.org/resources/technical-documents/genome-portal-technical-document) of the ATCC Genome Portal managed by [Jonathan Jacobs](https://bsky.app/profile/bioinformer.bsky.social). The code in the pipeline was written with input from GitHub Copilot.
+This pipeline relies heavily on other resources, primarily [Autocycler](https://github.com/rrwick/Autocycler) by [Ryan Wick](https://bsky.app/profile/rrwick.bsky.social), and the [methods](https://www.atcc.org/resources/technical-documents/genome-portal-technical-document) of the ATCC Genome Portal managed by [Jonathan Jacobs](https://bsky.app/profile/bioinformer.bsky.social). 
+
+## AI use statement
+
+The code in this pipeline was written with input from GitHub Copilot.
 
 ## Contact
 
-If you have any questions about this pipeline or how to implement any of it, please contact Dan Padfield at d.padfield\@exeter.ac.uk.
+If you have any questions about this pipeline, please contact Dan Padfield at d.padfield\@exeter.ac.uk.
 
 ## Other resources
 
--   Example script demonstrating how to download necessary packages for some of the pipeline.
+
 
 ## Contribute
 
-Please contribute to this documentation! Fixing any typos or
+Please contribute to this documentation! Fixing any typos or:
 
--   Turn this script into a bash scripts that can be ran on the server. Likely just the assembly steps, and maybe **sourmash** looking at contamination.
+- Submit an example script demonstrating how to download necessary packages for some of the pipeline.
+- Turn this script into a bash scripts that can be ran on the server.
+- Add in a step using **sourmash** to look at contamination.
+
+## Where to run this code
+
+You likely have access to multiple computing resources, ranging from your own personal desktop computer, to cloud computers where you can interactively program and do not have queuing software (e.g. RStudio servers) to High Performance Computing (e.g. Athena, Carson, or ISCA).
+
+The steps up until **manual checking of assemblies** should be run on a server or HPC, as making many long-read assemblies can take a long time. Personally, I have been using the RStudio Servers, which run Linux. If you are running this on a Mac or Windows machine, you may need to adapt the code slightly. The code is run in the Terminal using bash, I SSH into the RStudio Server using [Positron](https://positron.posit.co/), the new IDE from Posit (formerly RStudio), that works much like VSCode.
+
+For the **autocycler** steps onwards, I used my personal Mac (Apple Macbook Pro M2 2022 24GB MEM). The step that took the longest was annotation using **pgap**. If you struggle to install **pgap** then get in touch and I can run it for you on my machine.
 
 ## Overview of the pipeline
 
@@ -72,9 +86,7 @@ We then create a new environment (which is a bit like a virtual machine) for all
 
 **If there are conflicts between any of the packages in your install, it might be useful for you to create different environments for some of the different packages. This can be done easily by copying the line of code and editing it, an example is shown below.**
 
-This is all currently run on the RStudio Servers, which run Linux. If you are running this on a Mac or Windows machine, you may need to adapt the code slightly. The code is run in the Terminal using bash, I SSH into the RStudio Server using [Positron](https://positron.posit.co/), the new IDE from Posit (formerly RStudio), that works much like VSCode.
-
-```{r setup}
+```{bash setup}
 # install new mamba/conda installation if needed
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
@@ -127,7 +139,7 @@ This section assumes you have a folder with your short reads in fastq.gz format.
 
 **TIP. When running for loops in Terminal, I will often run a version to check the right filenames are being called before running the filtering step. To do this you can un-hashtag echo \$fwd and echo \$rev and hash the fastp command.**
 
-```{r filter_short_reads}
+```{bash filter_short_reads}
 # make directory for short trimmed short reads
 mkdir -p short_reads/trimmed
 trimmed_short=short_reads/trimmed
@@ -156,7 +168,7 @@ We try keep as many long reads as possible. Having too stringent a filter on min
 -   Minimum read length \> 1000bp
 -   Minimum mean read quality \> 10
 
-```{r filter_long_reads}
+```{bash filter_long_reads}
 # make directory
 mkdir -p long_reads/trimmed
 
@@ -179,7 +191,7 @@ Each subset is then used to generate a separate assembly. Creating diverse input
 
 The below command takes all the files in **long_reads/trimmed** and creates a **subsampled_reads** directory which will contain the subsampled read files. Each file with have its own sub-folder within **subsampled_reads**.
 
-```{r subsample_long_reads}
+```{bash subsample_long_reads}
 # subset reads
 for file in long_reads/trimmed/*.fastq.gz; do
     autocycler subsample --reads $file --out_dir long_reads/subsampled/$(basename ${file%.fastq.gz}) --genome_size 4.6M
@@ -194,7 +206,7 @@ This command will create an assembly using **canu**, **flye**, **metamdbg**, **m
 
 The following code runs autocycler on all of the subsampled long reads. It will create a folder called **assemblies** and put the assemblies in there. The assemblies will be named with the original long read file name, assembler name, and the sample name. This code could likely be sped up or parallelised, but for now it is run sequentially.
 
-```{r multiple_assemblies}
+```{bash multiple_assemblies}
 # set threads to use for assembly
 threads=15
 
@@ -223,7 +235,7 @@ done
 
 If you think you might have plasmids, you can also run **plassembler** to assemble plasmids. Assemblies made by **plassembler** will only include plasmids.
 
-```{r plasmid_assembly}
+```{bash plasmid_assembly}
 for folder in long_reads/subsampled/*;do
     foldername=$(basename "$folder")
 
@@ -307,7 +319,7 @@ head(info)
 
 To filter fasta files, you can use [**seqkit**](https://bioinf.shenwei.me/seqkit/). The following code will filter the assemblies based on the expected genome size. It will create a new folder called **filtered_assemblies** and put the filtered assemblies in there. It will keep all sequences that are greater than 80% of the expected genome size. If the filtered assembly is empty, it will be removed.
 
-```{r manual_checking}
+```{bash manual_checking}
 # make directory for filtered assemblies
 mkdir -p assemblies/filtered_assemblies
 
@@ -358,7 +370,7 @@ From this filtering process, you may lose some samples that do not pass this QC,
 
 If you expect plasmids, you may want to adjust these criteria. In our case we have plasmids of interest (R1 and RP4) that are between 50,000 and 100,000 bp in length. We can filter the assemblies to keep only those that are within this range. This can be done using **seqkit** again, but this time we will use the `-m` and `-M` options to specify the minimum and maximum length of the sequences to keep.
 
-```{r filter_plasmids}
+```{bash filter_plasmids}
 # our plasmids are between 50000 and 100000bp
 
 # run for loop to filter assemblies
@@ -385,14 +397,14 @@ We follow the steps as documented by [**Autocycler**](https://www.biorxiv.org/co
 
 First[**autocycler compress**](https://github.com/rrwick/Autocycler/wiki/Autocycler-compress) uses the input assemblies to build a compacted De Bruijn graph (a.k.a. a unitig graph). This command takes an input directory named **filtered/assemblies** which contains the input assemblies in FASTA format. It will create the **debruijn** directory which will contain the graph as file named **input_assemblies.gfa**.
 
-```{r compress_assemblies}
+```{bash compress_assemblies}
 # run autocycler compress to create a de bruijn graph of all the assemblies
 autocycler compress -i assemblies/filtered_assemblies -a assemblies/filtered_assemblies/debruijn
 ```
 
 Next, [**autocycle cluster**](https://github.com/rrwick/Autocycler/wiki/Autocycler-cluster) groups input contigs into clusters. A cluster is a group of contigs which represent the same genomic sequence. It also decides which of these clusters should be included in the final assembly (QC-pass) and which should not (QC-fail). This command takes a directory created by **autocycler compress** (named **debruijn** in the example) which must contain an **input_assemblies.gfa** file. It will create a subdirectory named **clustering** which in turn contains a **qc_pass** directory for the good clusters and a **qc_fail** directory for the bad clusters.
 
-```{r cluster_assemblies}
+```{bash cluster_assemblies}
 # run autocycler cluster to see which bits of the assembly should be included in the final assembly
 autocycler cluster -a assemblies/filtered_assemblies/debruijn
 ```
@@ -408,7 +420,7 @@ done
 
 [**autocyler resolve**](https://github.com/rrwick/Autocycler/wiki/Autocycler-resolve) aims to resolve repeats and ambiguities in each cluster. By the end of it, hopefully there is a single consentig for each cluster. This command runs through each cluster in **qc_pass**.
 
-```{r resolve_assemblies}
+```{bash resolve_assemblies}
 # run autocycler resolve to resolve repeats and ambiguities in each cluster
 for c in assemblies/filtered_assemblies/debruijn/clustering/qc_pass/cluster_*; do
     autocycler resolve -c "$c"
@@ -424,7 +436,7 @@ autocycler combine -a assemblies/filtered_assemblies/RP4/debruijn -i assemblies/
 
 If this has worked, you will hopefully receive the message.
 
-```{r}
+```{bash}
 Consensus assembly is fully resolved 😄
 ```
 
@@ -448,7 +460,7 @@ The command **dnaapler all** works for prokaryote genomes, and **dnaapler plasmi
 
 It then uses **autocycler gfa2fasta** to convert the reoriented GFA file to a FASTA file. This is required for downstream steps like polishing and annotation.
 
-```{r reorient_assembly}
+```{bash reorient_assembly}
 # run dnaapler to reorient the assembly
 dnaapler all -i assemblies/filtered_assemblies/ecoli/debruijn/consensus_assembly.gfa  -o assemblies/filtered_assemblies/ecoli/debruijn/dnaapler -t 8
 
@@ -465,9 +477,22 @@ If you also have short reads, there are many tools. Ryan Wick recommends Polypol
 
 A paper benchmarking different polishing tools can be found [here](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-024-10582-x#Sec41).
 
+_If you have a plasmid assembly here that you have isolated from your wider bacterial genome, you may want to remove the reads that map to your host bacteria. To do this you can use minimap which has code for doing this for both long and short reads. We shall not cover that here, but example code is below. Both commands take the trimmed long or short reads and map them to the bacteria assembly you have already created (Make sure to create that first!). It then returns the unmapped reads in fastq format which can then be passed onto medaka and Polypolish to polish the assembly._
+
+```{bash filter_plasmid_reads}
+# NEED TO MAKE SURE MINIMAP AND SAMTOOLS ARE INSTALLED IN YOUR ENVIRONMENT
+# run minimap2 to only keep reads NOT mapped to the bacteria assembly
+
+# remove bacteria from Nanopore long reads
+minimap2 -ax map-ont $bacteria_assembly $long_reads | samtools fastq -n -f 4 - > ${long_reads%fastq.gz}_plasmid.fastq
+
+# remove bacteria from short reads
+minimap2 -ax sr $bacteria_assembly $short_reads ${short_reads%1_trimmed.fastq.gz}2_trimmed.fastq.gz | samtools sort -n | samtools fastq -f 4 -s ${short_reads%1_trimmed.fastq.gz}unmapped.fastq -1 ${short_reads%1_trimmed.fastq.gz}plasmid_1.fastq -2 ${short_reads%1_trimmed.fastq.gz}plasmid_2.fastq
+```
+
 This command runs **medaka** and then **Polypolish** on the reoriented assembly.
 
-```{r polish_assembly}
+```{bash polish_assembly}
 # if you have issues installing medaka into the autocycler environment, you can install it into a separate environment
 
 # create a folder to place the polished the assemblies
@@ -486,8 +511,6 @@ conda deactivate
 conda activate autocycler
 
 # run polypolish
-
-#
 assembly=consensus.fasta
 short_read_fwd=/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_1_trimmed.fastq.gz
 short_read_rev='/Users/dp415/google_drive/work_googledrive/zoltan/strain_data/sequencing/hybrid_sequencing/short_reads/trimmed/307501E_WT_2_trimmed.fastq.gz'
@@ -503,10 +526,30 @@ rm *.amb *.ann *.bwt *.pac *.sa *.sam
 
 ```
 
+## Check for errors
+
+We should now have a complete, high quality, polished assembly. However, errors can still exist. To look for these, we can use [**breseq**](https://github.com/barricklab/breseq) which is a tool for detecting mutations in bacterial genomes. By using the short reads we used for the polishing, we can check for any errors in the assembly. You can view any predictied "mutations" by looking at **output/summary.html** and clicking on the **mutations predictions** tab. In our case, this would represent errors in the assembly. If these exist, you can correct them by editing the **.gd** file. A walkthrough for doing this can be found on the [**breseq** wiki](https://github.com/barricklab/breseq/wiki/Tutorial-Clones). 
+
+This command runs **breseq** on the polished assembly. It assume you are still within the directory where **polished.fasta** exists.
+
+```{bash check_errors}
+# run breseq to check for errors in the assembly
+breseq -l 80 -j 8 -o breseq -r polished.fasta $short_read_fwd $short_read_rev
+```
+
 ## Annotate assembly
 
+You can annotate the assembly using [**prokka**](https://github.com/tseemann/prokka) easily and quickly, but best practice now seems to be using the [**pgap**](https://github.com/ncbi/pgap?tab=readme-ov-file) pipeline (NCBI Prokaryotic Genome Annotation Pipeline). All genomes submitted to NCBI get annotated this way! This pipeline is a bit more comprehensive than **prokka**, and includes a completeness check using [**CheckM**](https://pubmed.ncbi.nlm.nih.gov/25977477/) and can confirm the correct organism is associated with the genome prior to annotation.
 
+This pipeline runs in a docker container. As such, I have not had much joy installing this on RStudio server as you cannot install Docker, but it is installable for Mac if you download the Docker desktop app, and as we only run it once per genome, I take this as an acceptable compromise. When it installs, it takes a long time to download all the necessary databases.
 
-## Check quality
+This command assumes you have installed **pgap** using the commands on their GitHub. You will want to change directory to where you installed **pgap**.
 
-## 
+```{bash annotate_assembly}
+# change directory to where you installed pgap
+cd ~/where/you/installed/pgap
+
+# run pgap
+./pgap.py -r -o ~/ecoli/pgap -g ~/ecoli/polished.fasta -s 'Escherichia coli' --taxcheck
+```
+
