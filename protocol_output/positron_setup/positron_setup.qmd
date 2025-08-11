@@ -69,6 +69,7 @@ Smarter people than me have written about how they use Positron, so I will list 
 - Set up GitHub Copilot for autocompletion using [this](https://positron.posit.co/assistant.html). 
 - Set up a code snippet for starting bash and R scripts.
 - Set up a few keybindings.
+- Installed some extensions
 
 # Keybindings
 
@@ -140,3 +141,8 @@ My current keybinding file is as follows (it likely has some errors in but works
     }
 ]
 ```
+
+# Extensions
+
+- Positron R Packages
+- 

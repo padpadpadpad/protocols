@@ -1,0 +1,98 @@
+---
+title: AsPredicted Project Planning
+description: A modified version of the AsPredicted pre-registration questions to help you plan your research project.
+author: Daniel Padfield
+date: 08 08 2025
+date-modified: last-modified
+date-format: long
+categories: 
+  - lab
+  - computational
+execute: 
+  eval: false
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+    standalone: true
+    embed-resources: true
+
+  pdf:
+    toc: true
+    toc-depth: 5
+    fontsize: 14pt
+    code-overflow: wrap
+    keep-tex: false
+    include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+  
+  docx:
+    toc: true
+    toc-depth: 5
+    code-overflow: wrap
+---
+
+# Outline
+
+These questions are inspired and modified from [AsPredicted](https://aspredicted.org/). AsPredicted is a platform that makes it easy for researchers to pre-register their studies, and easy for others to read and evaluate those pre-registrations. To pre-register a study on AsPredicted, a researcher answers nine simple questions about their research design and analyses. If you want to learn more about pre-registration and its benefits for science, you can find resources [here](https://help.osf.io/article/145-preregistration) and [here](https://datacolada.org/64).
+
+Preregistration and proper planning will help you think more deeply about your research project in a consistent way to consider (1) your questions, hypotheses, and predictions (2) your experimental design and data collection and (3) how you are going to analyse your data. 
+
+If you are an undergraduate or Masters student, this will help you do a great research project and allow you to better understand how hypothesis-driven research is done! This should also help your supervisor (or PI) understand what they have asked you to do and whether it is appropriate.
+
+If you are a PhD student, postdoc, or PI, this should help you design better experiments and think about what you are going to do before you do it.
+
+# How to use this document
+
+1. **Read** through the **Outline** above.
+2. **Answer each of questions** as fully as you can. Sketching out your experiment or patterns you expect might help describe what data you expect and how you might analyse it. 
+3. **Discuss it with your supervisor** or others doing the project with you. 
+4. Once you are all happy, **finalise the document**, saving a copy in the base folder of the project.
+5. **Start the research**.
+6. **Reflect on this document** throughout your project and make note down changes from the plan and **why they were necessary**.
+
+# Research planning
+
+## Names
+
+*Names of people involved in the research.*
+
+## Project title.
+
+*What is the project called.*
+
+## 1. Data collection.
+
+*Have any data been collected for this study already?* *This can be from a previous project within the group, preliminary data you have collected, or data from the literature.*
+
+## 2. Hypothesis
+
+*What's the main question being asked or hypothesis being tested in this study? What is your prediction? Try to be as specific as possible here as it will help you design a better experiment.*
+
+## 3. Dependent/response variable
+
+*Describe the key dependent variable(s) specifying how they will be measured.* *For example, number and proportion of resistant bacteria in cultures with and without phage. These will be measured using plate counts of cultures throughout the experiment.*
+
+## 4. Independent/explanatory variable/predictors
+
+*How many and which independent/explanatory variables will be used and describe how they will be measured? Are they continuous (e.g. phage abundance in counts per mL) or categorical (e.g. phage are present or absent)?*
+
+## 5. Analyses
+
+*Specify exactly which analyses you will conduct to examine the main question/hypothesis.* *E.g. To look at the relationship between resistance to phage and phage presence/absence, we will use general linear models with binomial error structure. Model selection will be done by sequentially removing non-significant predictors and likelihood ratio tests.*
+
+## 6. Outliers and Exclusions
+
+*Describe exactly how outliers will be defined and handled, and your precise rule(s) for excluding observations.* *As a rule, you should retain all your raw data, but there are instances when methodological reasons mean that some of your data may be less reliable (e.g. low plate counts, pipetted the wrong volume, collected data at a nonstandard time). How might you deal with these discrepancies?*
+
+## 7. Sample Size
+
+*How many observations will be collected or what will determine sample size?* *For example, I will sample cultures every other day and plate them for resistant and susceptible bacteria. We will have 8 independent replicates in each treatment to ensure we have statistical power to see a significant difference.*
+
+# 8. Other
+
+*Anything else you would like to pre-register?*
