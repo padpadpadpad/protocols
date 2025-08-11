@@ -49,11 +49,16 @@ If you are a PhD student, postdoc, or PI, this should help you design better exp
 # How to use this document
 
 1. **Read** through the **Outline** above.
-2. **Answer each of questions** as fully as you can. Sketching out your experiment or patterns you expect might help describe what data you expect and how you might analyse it. 
-3. **Discuss it with your supervisor** or others doing the project with you. 
-4. Once you are all happy, **finalise the document**, saving a copy in the base folder of the project.
-5. **Start the research**.
-6. **Reflect on this document** throughout your project and make note down changes from the plan and **why they were necessary**.
+1. **Copy the questions** into a your preferred word processor, or **Download the Word Document** version on the right hand side of this page.
+1. **Answer each of questions** as fully as you can. Sketching out your experiment or patterns you expect might help describe what data you expect and how you might analyse it. 
+1. **Discuss it with your supervisor** or others doing the project with you. 
+1. Once you are all happy, **finalise the document**, saving a copy in the base folder of the project.
+1. **Do the research**.
+1. **Reflect on this document** throughout your project and make note down changes from the plan and **why they were necessary**.
+
+---
+
+{{< pagebreak >}}
 
 # Research planning
 
