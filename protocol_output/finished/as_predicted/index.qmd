@@ -98,6 +98,6 @@ If you are a PhD student, postdoc, or PI, this should help you design better exp
 
 *How many observations will be collected or what will determine sample size?* *For example, I will sample cultures every other day and plate them for resistant and susceptible bacteria. We will have 8 independent replicates in each treatment to ensure we have statistical power to see a significant difference.*
 
-# 8. Other
+## 8. Other
 
 *Anything else you would like to pre-register?*

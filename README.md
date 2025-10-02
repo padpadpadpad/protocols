@@ -23,6 +23,7 @@ To get started:
 1. Make changes to the file you want to edit. You can do this in a variety of ways.
     1. You can use Positron and RStudio to edit the .qmd files directly. They both have a built-in preview feature that allows you to see how the document will look when rendered.
     1. You can use [trackdown](https://github.com/claudiozandonella/trackdown/) which can allow you to create a copy of the .qmd file to Google Docs, allowing you to edit it there and then re-download it to your local computer, and re-rendering in quarto. An example of this is below.
+    1. If you are adding citations, you can use **rbbt::bbt_update_bib()** to update the bib file for this repo. This command goes through a .qmd file and extracts the citations, adding them to the bib file.
 1. Once your are happy with your progress, render your changes using **quarto::quarto_render('protocol_input/file_name.qmd')**, or by clicking the "Render" button in Positron or RStudio. This will generate the HTML, PDF, and Word Document versions of the protocol. They will live in the **protocol_output/protocol_input**.
 1. To move files to their correct location, you can run **post_render.R** in its entirety.
 1. Save and commit your changes. In both RStudio and Positron you can do this interactively in the IDE.

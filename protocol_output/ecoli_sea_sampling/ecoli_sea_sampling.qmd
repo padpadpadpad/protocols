@@ -41,33 +41,52 @@ This describes a standardised method for water sampling for investigating sewage
 
 The equipment will be provided by your supervisors.
 
+**Undergraduates must sample with their buddy! Make sure to message in the Teams chat when you are sampling and when you have finished.** 
+
 ## Materials and Equipment
 
 * Ethanol-resistant marker pen for labelling tubes
 * A bucket
-* 50 mL falcon tubes
-* Nitrile gloves.
- 
+* Rope
+* 50 mL falcon tubes (sterile)
+* Nitrile gloves
+* Charged mobile to note down metadata and what3words location (at least 50% battery). Have the spreadsheet as an open tab in your browser or note values down on another app
+* Towel
+* Hand sanitiser
+* TDS sensor
+* Sampling sheet
+
 ## Method
 
 1. Label three 50 mL falcon tubes with your initials, the time and date, and the what3words location of where you are sampling. You can download the app for your Android or iPhone easily from [here](https://what3words.com/products/what3words-app).
-2. Take a surface sample of seawater using the bucket from as far from the shoreline as practical and safe.
-3. Mix by swirling the contents of the bucket immediately and fill a 50 mL falcon tubes to the neck by immersing the tube in the bucket. Do not allow the contents of the bucket to settle before filling the bottle. Close the lid of the falcon tubes tightly.
-4. Empty the bucket back into the sea.
-5. Repeat steps 2-4 three times at each sampling event.
-6. By the end you should have 3 falcon tubes every time you sample.
-7. Place the samples in a cool bag, store them in the cold room at 4ºC as quickly as possible.
-8. Plate within 4 days.
+1. Complete all necessary metadata on online spreadsheet (see below) or sampling sheet.
+1. Take a surface sample of seawater using the bucket from as far from the shoreline as practical and safe. If sampling from a pier, you can use a roper to lower the bucket into the water.
+1. Mix by swirling the contents of the bucket immediately and fill a 50 mL falcon tube to the neck by immersing the tube in the bucket, taking care not to touch the inside of the bottle or inside of the bottle cap. Do not allow the contents of the bucket to settle before filling the bottle. When filling the bottle aim the bottle top downward then point upward while underwater to fill it. Close the lid of the falcon tubes tightly.
+1. Empty the bucket back into the sea.
+1. Repeat steps 2-4 three times at each sampling event.
+1. By the end you should have 3 falcon tubes every time you sample.
+1. Store them in the cold room at 4ºC as quickly as possible on the same day.
+1. Plate within 4 days.
+1. Wash hands and arms up to elbows once finished sampling and before eating.
+1. Let the Teams chat know when you have finished sampling.
 
 ## Metadata collection
 
-In addition to water sampling, the following data should be collected at the time of each sampling event. This should be recorded to this spreadsheet. If you do not have access please email Daniel Padfield to d.padfield@exeter.ac.uk.
+In addition to water sampling, the following data should be collected at the time of each sampling event. This should be recorded to [this spreadsheet](https://universityofexeteruk-my.sharepoint.com/:x:/r/personal/d_padfield_exeter_ac_uk/_layouts/15/Doc.aspx?sourcedoc=%7B8BBBF371-D47D-4CD5-BA6B-29DE78FD96BA%7D&file=sampling_record.xlsx&action=default&mobileredirect=true). If you do not have access please email Daniel Padfield to d.padfield@exeter.ac.uk.
 
 * Date and time of sampling
 * Name(s) of person(s) collecting the samples
 * What3words location (you can download the app here: https://what3words.com/products/what3words-app)
 * Next high tide (https://www.tidetimes.co.uk/falmouth-tide-times)
 * Next low tide (https://www.tidetimes.co.uk/falmouth-tide-times)
+* Water temperature (use TDS sensor)
+* TDS (use TDS sensor). Total Dissolved Solids (TDS) is a measure of the dissolved inorganic and organic substances present in the water, specifically those smaller than 2µm. Elevated TDS values can indicate pollution. 
+* Electrical conductivity (use TDS sensor). EO measures the ability of water to conduct an electrical current, which increased with the concentration of dissolved charged chemicals in the water Significantly elevated EO values can indicate pollution of chemicals into the water.
+* Day Weather conditions (using the [AccuWeather Falmouth](https://www.accuweather.com/en/gb/falmouth/tr11-3/current-weather/3194))
+    - Wind (direction and speed)
+    - Cloud cover
+    - Max UV index
+    - Precipitation
   
 ## Health and safety advice
 

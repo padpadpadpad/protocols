@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Daniel Padfield">
+<meta name="dcterms.date" content="2025-07-07">
 <meta name="description" content="Protocol for preparing and plating seawater samples for counting E. coli.">
 
 <title>How clean is the sea? Plating for E. coli</title>
@@ -21,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
-</style>
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging-indent div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}</style>
 
 
 <script>/*!
@@ -2146,10 +2166,14 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#materials-and-equipment" id="toc-materials-and-equipment" class="nav-link" data-scroll-target="#materials-and-equipment">Materials and Equipment</a></li>
   <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a>
   <ul>
   <li><a href="#stage-1.-prepare-and-make-plates" id="toc-stage-1.-prepare-and-make-plates" class="nav-link" data-scroll-target="#stage-1.-prepare-and-make-plates">Stage 1. Prepare and make plates</a></li>
+  <li><a href="#stage-2.-sample-concentration-via-centrifugation" id="toc-stage-2.-sample-concentration-via-centrifugation" class="nav-link" data-scroll-target="#stage-2.-sample-concentration-via-centrifugation">Stage 2. Sample Concentration via Centrifugation</a></li>
+  <li><a href="#stage-3-plating-and-incubation" id="toc-stage-3-plating-and-incubation" class="nav-link" data-scroll-target="#stage-3-plating-and-incubation">Stage 3: Plating and Incubation</a></li>
   </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ecoli_sea_plating.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="ecoli_sea_plating.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
 </div>
@@ -2182,14 +2206,14 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">July 7, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 25, 2025</p>
+      <p class="date-modified">August 20, 2025</p>
     </div>
   </div>
     
@@ -2202,60 +2226,95 @@ vertical-align: -.125em;
 
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<p>This protocol outlines the steps for concentrating E. coli from 50 mL water samples using centrifugation, followed by plating on selective media. It was created partly created using Google Gemini. Make sure you have had training on all the equipment and methods outlined. If you have any questions, ask somebody who can help. ## Materials and Equipment * Water Samples: 50 mL water samples collected in sterile 50 mL Falcon tubes. * Mega-Centrifuge: Capable of spinning 50 mL Falcon tubes. * Sterile Pipettes and Tips: Various volumes (e.g., 1 mL, 10 mL, 200 µL). * Serological pipette. * Petri Dishes: 90 mm diameter. * 96 well plates. * Sterile glass beads. * LB agar (for total bacterial count). * Selective/Differential Agar Media for E. coli:<br>
-* Chromogenic Agar: Such as CHROMagar™ E. coli, m-ColiBlue21® Agar, or similar. These media typically produce distinctively colored colonies for E. coli (e.g., blue or purple). * Sterile Diluent: 0.85% NaCl solution. * Incubator: Set to 37 ºC. * Vortex. * Ethanol (70%) or other disinfectant. * Autoclave bag for waste disposal. * Ethanol-resistant marker pen for labelling plates. * Plastic tub for liquid waste.</p>
+<p>This protocol outlines the steps for concentrating <em>E. coli</em> from 50 mL water samples using centrifugation, followed by plating on selective media. It was created partly created using Google Gemini.</p>
+<p>Make sure you have had training on all the equipment and methods outlined. If you have any questions, ask somebody who can help.</p>
+</section>
+<section id="materials-and-equipment" class="level2">
+<h2 class="anchored" data-anchor-id="materials-and-equipment">Materials and Equipment</h2>
+<ul>
+<li>Water Samples: 50 mL water samples collected in sterile 50 mL Falcon tubes.</li>
+<li>Mega-Centrifuge: Capable of spinning 50 mL Falcon tubes.</li>
+<li>Sterile Pipettes and Tips: Various volumes (e.g., 1 mL, 10 mL, 200 µL).</li>
+<li>Serological pipette.</li>
+<li>Petri Dishes: 90 mm diameter.</li>
+<li>96 well plates.</li>
+<li>Sterile glass beads.</li>
+<li>LB agar (for total bacterial count).</li>
+<li>Selective/Differential Agar Media for E. coli:
+<ul>
+<li>Chromogenic Agar: Such as CHROMagar™ E. coli, m-ColiBlue21® Agar, or similar. These media typically produce distinctively colored colonies for E. coli (e.g., blue or purple).</li>
+</ul></li>
+<li>Sterile Diluent: 0.85% NaCl solution.</li>
+<li>Incubator: Set to 37 ºC.</li>
+<li>Vortex.</li>
+<li>Ethanol (70%) or other disinfectant.</li>
+<li>Autoclave bag for waste disposal.</li>
+<li>Ethanol-resistant marker pen for labelling plates.</li>
+<li>Plastic tub for liquid waste.</li>
+</ul>
 </section>
 <section id="method" class="level2">
 <h2 class="anchored" data-anchor-id="method">Method</h2>
 <section id="stage-1.-prepare-and-make-plates" class="level3">
 <h3 class="anchored" data-anchor-id="stage-1.-prepare-and-make-plates">Stage 1. Prepare and make plates</h3>
+<p><strong>THIS MIGHT BE BEST DONE THE DAY BEFORE YOU PLATE.</strong></p>
 <ol type="1">
 <li>Preparation:
 <ol type="1">
-<li>Turn on a laminar flow hood</li>
-<li>Ensure all equipment is clean and sterilised</li>
+<li>Turn on a laminar flow hood.</li>
+<li>Ensure all equipment is clean and sterilised.</li>
 </ol></li>
 <li>Pour LB plates and E. coli plates and leave to dry with lids off (~20 mins). An 800 mL bottle of molten agar should be able to pour around 40 plates.</li>
 <li>Store upside down, in their original plastic sleeve in the 4ºC cold room.</li>
-<li>Clean area and turn off laminar flow hood ### Stage 2. Sample Concentration via Centrifugation</li>
+<li>Clean laminar flow hood with ethanol and turn off. Clean other surfaces you have used with ethanol.</li>
+</ol>
+</section>
+<section id="stage-2.-sample-concentration-via-centrifugation" class="level3">
+<h3 class="anchored" data-anchor-id="stage-2.-sample-concentration-via-centrifugation">Stage 2. Sample Concentration via Centrifugation</h3>
+<ol type="1">
 <li>Preparation:
 <ol type="1">
-<li>Turn on a Cat II hood</li>
+<li>Turn on a Cat II hood.</li>
 <li>Ensure all equipment is clean and sterilised.<br>
 </li>
-<li>Get the required plates (that you have already poured) out of the cold room so they are ready to be used.</li>
+<li>Get the required plates (that you have already poured) out of the cold room so they are ready to be used. Remove them from their sleeve in the Cat II hood and spread them out to allow condensation on the lids to evaporate.</li>
 </ol></li>
 <li>Centrifugation:
 <ol type="1">
 <li>Balance the Mega-Centrifuge by placing tubes of equal volume and weight opposite each other. Use a balance tube filled with tap water if you have an odd number of samples.</li>
-<li>Centrifuge the samples at 5,000 x g for 15-20 minutes at 4ºC. This force and duration should pellet the bacterial cells.</li>
+<li>Centrifuge the samples at 15,000 x g for 30 minutes at 4ºC. This force and duration should pellet the bacterial cells <span class="citation" data-cites="brackenApparentBiasRiver2006">[<a href="#ref-brackenApparentBiasRiver2006" role="doc-biblioref">1</a>]</span>.</li>
 </ol></li>
 <li>Supernatant Removal:
 <ol type="1">
 <li>Carefully remove the Falcon tubes from the centrifuge, disturbing the pellet as little as possible.</li>
 <li>Using a 50 mL serological pipette, remove the supernatant, leaving a small volume (e.g., 0.5 - 1 mL) containing the concentrated pellet at the bottom of the tube. Be very careful not to remove the pellet. A 1mL pipette can be used to more controllably remove more of the supernatant. Empty the supernatant into the liquid waste tub.</li>
-<li>Alternative (if pellet is very distinct): Carefully decant the supernatant, leaving the pellet behind. This method carries a higher risk of losing some of the pellet.<br>
+<li>Alternatively (if pellet is very distinct): Carefully decant the supernatant, leaving the pellet behind. This method carries a higher risk of losing some of the pellet.<br>
 </li>
 </ol></li>
 <li>Pellet resuspension:
 <ol type="1">
 <li>Add 5mL of sterile NaCl solution to the tube containing the pellet.</li>
-<li>Gently vortex the tube to thoroughly resuspend the pellet. This concentrated suspension now contains the E. coli from the original 50 mL sample. ## Stage 3: Plating and Incubation</li>
+<li>Gently vortex the tube to thoroughly resuspend the pellet. This concentrated suspension now contains the E. coli from the original 50 mL sample.</li>
 </ol></li>
+</ol>
+</section>
+<section id="stage-3-plating-and-incubation" class="level3">
+<h3 class="anchored" data-anchor-id="stage-3-plating-and-incubation">Stage 3: Plating and Incubation</h3>
+<ol type="1">
 <li>Dilution (if necessary):
 <ol type="1">
 <li>Prepare serial dilutions of your resuspension.</li>
-<li>Prepare a 96-well plate with 180 µL of NaCl solution in using a multichannel pipette.</li>
-<li>Pipette 20 µL of your resuspended culture into the correct well of the first row</li>
+<li>Prepare a 96-well plate with 180 µL of NaCl solution in each well using a multichannel pipette.</li>
+<li>Pipette 20 µL of your resuspended culture into the correct well of the first row.</li>
 <li>Mix the culture in the well (by pipetting up and down using a multichannel pipette 30x) then transfer 20µL to the next row (representing another ten fold dilution).</li>
 <li>Dispense pipette tips into the waste jar.</li>
-<li>With new pipette tips mix the culture in the next row and then transfer to the next row</li>
-<li>Dispense of pipette tips</li>
-<li>Repeat until you have gone to the correct number of dilutions</li>
+<li>With new pipette tips mix the culture 30x in the next row and then transfer to the next row.</li>
+<li>Dispense of pipette tips.</li>
+<li>Repeat steps 6 and 7 until you have gone to the correct number of dilutions.</li>
 </ol></li>
 <li>Plate:
 <ol type="1">
-<li>Label the plates on the agar side (not the lid) with the sample information and your team’s initials</li>
+<li>Label the plates on the agar side (not the lid) with the sample information and your team’s initials.</li>
 <li>Place 6-10 glass beads onto the surface of each plate.</li>
 <li>Pipette 50µL of the suspension (or a dilution) onto one of the beads sat on the agar plate.</li>
 <li>Shake the plates for 30 seconds in a left to right and forwards and backwards motion to spread the beads over the plates. Do not shake the plates by moving the beads round in a circle</li>
@@ -2273,6 +2332,14 @@ vertical-align: -.125em;
 </ol></li>
 </ol>
 </section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-brackenApparentBiasRiver2006" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline"><strong>Bracken CL</strong>, <strong>Hendricks CW</strong>, <strong>Harding AK</strong>. <a href="https://doi.org/10.1016/j.mimet.2006.04.003">Apparent bias in river water inoculum following centrifugation</a>. <em>Journal of Microbiological Methods</em> 2006;67:304–309.</div>
+</div>
+</div>
 </section>
 
 </main>
