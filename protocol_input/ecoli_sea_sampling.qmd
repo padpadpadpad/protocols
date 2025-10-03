@@ -59,9 +59,10 @@ The equipment will be provided by your supervisors.
 ## Method
 
 1. Label three 50 mL falcon tubes with your initials, the time and date, and the what3words location of where you are sampling. You can download the app for your Android or iPhone easily from [here](https://what3words.com/products/what3words-app).
-1. Complete all necessary metadata on online spreadsheet (see below) or sampling sheet.
+1. Complete all necessary metadata on online spreadsheet (see below) or sampling sheet that you can print off [here](https://universityofexeteruk-my.sharepoint.com/:w:/r/personal/d_padfield_exeter_ac_uk/Documents/ecoli_seawater_students/methods/sampling_sheet.docx?d=w47b0c4ffbe714ae792f5d9920bac6bdb&csf=1&web=1&e=vkO1dW).
 1. Take a surface sample of seawater using the bucket from as far from the shoreline as practical and safe. If sampling from a pier, you can use a roper to lower the bucket into the water.
 1. Mix by swirling the contents of the bucket immediately and fill a 50 mL falcon tube to the neck by immersing the tube in the bucket, taking care not to touch the inside of the bottle or inside of the bottle cap. Do not allow the contents of the bucket to settle before filling the bottle. When filling the bottle aim the bottle top downward then point upward while underwater to fill it. Close the lid of the falcon tubes tightly.
+1. Before emptying the bucket, use the TDS sensor to measure water temperature, TDS and electrical conductivity. Wait until measurements stabilise before recording the values.
 1. Empty the bucket back into the sea.
 1. Repeat steps 2-4 three times at each sampling event.
 1. By the end you should have 3 falcon tubes every time you sample.
@@ -72,7 +73,7 @@ The equipment will be provided by your supervisors.
 
 ## Metadata collection
 
-In addition to water sampling, the following data should be collected at the time of each sampling event. This should be recorded to [this spreadsheet](https://universityofexeteruk-my.sharepoint.com/:x:/r/personal/d_padfield_exeter_ac_uk/_layouts/15/Doc.aspx?sourcedoc=%7B8BBBF371-D47D-4CD5-BA6B-29DE78FD96BA%7D&file=sampling_record.xlsx&action=default&mobileredirect=true). If you do not have access please email Daniel Padfield to d.padfield@exeter.ac.uk.
+In addition to water sampling, the following data should be collected at the time of each sampling event. This should be recorded to [this spreadsheet](https://universityofexeteruk-my.sharepoint.com/:x:/r/personal/d_padfield_exeter_ac_uk/_layouts/15/Doc.aspx?sourcedoc=%7B8BBBF371-D47D-4CD5-BA6B-29DE78FD96BA%7D&file=sampling_record.xlsx&action=default&mobileredirect=true). You can upload this at a later date and record the same data using [this sample sheet](https://universityofexeteruk-my.sharepoint.com/:w:/r/personal/d_padfield_exeter_ac_uk/Documents/ecoli_seawater_students/methods/sampling_sheet.docx?d=w47b0c4ffbe714ae792f5d9920bac6bdb&csf=1&web=1&e=vkO1dW). If you do not have access please email Daniel Padfield to d.padfield@exeter.ac.uk.
 
 * Date and time of sampling
 * Name(s) of person(s) collecting the samples
